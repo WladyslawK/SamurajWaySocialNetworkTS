@@ -13,16 +13,3 @@
 
 }
 
-.nav{
-  grid-area: n;
-  background-color: burlywood;
-}
-.content{
-  grid-area: c;
-  background-color: cadetblue;
-}
-.content img {
-  width: 100%;
-  height: 300px;
-}
-
