@@ -7,10 +7,10 @@ const Navbar = () => {
         <>
             <nav className={s.nav}>
                 <div className={`${s.item} ${s.active}`}>
-                    Profile
+                    <a href="/profile">Profile</a>
                 </div>
                 <div className={s.item}>
-                    Messages
+                    <a href="/dialogs">Messages</a>
                 </div>
                 <div className={s.item}>
                     News
