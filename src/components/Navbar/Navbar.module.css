@@ -3,11 +3,11 @@
     background-color: burlywood;
     padding-left: 10px;
 }
-.item{
+.item a{
     color: white;
+    text-decoration: none;
 }
-.active{
-    color: mediumspringgreen;
-    text-decoration: underline;
+a.active{
+    color: darkred;
 
 }
