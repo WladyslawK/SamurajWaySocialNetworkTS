@@ -14,17 +14,30 @@ export type MessageType = {
     name: string
 }
 
-export type AppType = {
+//typisation for state
+
+type ProfilePageType = {
     postsData: PostType[]
+}
+
+type DialogsPageType = {
     dialogsData: DialogType[]
-    messagesData: MessageType[]
+    messagesData:  MessageType[]
+}
+
+type StateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+}
+
+export type AppType = {
+    state: StateType
 }
 
 export type ProfileType = {
-    postsData: PostType[]
+    state: ProfilePageType
 }
 
 export type DialogsType = {
-    dialogsData: DialogType[]
-    messagesData: MessageType[]
+    state: DialogsPageType
 }

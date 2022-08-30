@@ -5,10 +5,10 @@ import {Message} from "./Message/Message";
 import {Dialog} from "./Dialog/Dialog";
 import {DialogsType} from "../../types";
 
-export const Dialogs: React.FC<DialogsType> = ({dialogsData, messagesData}) => {
+export const Dialogs: React.FC<DialogsType> = ({state}) => {
 
-    const dialogElements = dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id}/>)
-    const messagesElements = messagesData.map(message => <Message id={message.id} message={message.name}/>)
+    const dialogElements = state.dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id}/>)
+    const messagesElements = state.messagesData.map(message => <Message id={message.id} message={message.name}/>)
 
     //UI
     return (

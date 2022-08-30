@@ -12,7 +12,7 @@ import {AppType} from "./types";
 
 
 
-export const App: React.FC<AppType> = ({postsData, dialogsData, messagesData}) => {
+export const App: React.FC<AppType> = ({state}) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -20,8 +20,8 @@ export const App: React.FC<AppType> = ({postsData, dialogsData, messagesData}) =
                 <Navbar/>
 
                 <div className="app-wrapper-content">
-                    <Route path={"/profile"} render={() => <Profile postsData={postsData}/>}/>
-                    <Route path={"/dialogs"} render={() => <Dialogs dialogsData={dialogsData} messagesData={messagesData}/>}/>
+                    <Route path={"/profile"} render={() => <Profile state={state.profilePage}/>}/>
+                    <Route path={"/dialogs"} render={() => <Dialogs state={state.dialogsPage}/>}/>
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
                 </div>
