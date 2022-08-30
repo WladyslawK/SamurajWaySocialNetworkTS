@@ -7,8 +7,12 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Router} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
+import {AppType} from "./types";
 
-function App() {
+
+
+
+export const App: React.FC<AppType> = ({postsData, dialogsData, messagesData}) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -16,10 +20,10 @@ function App() {
                 <Navbar/>
 
                 <div className="app-wrapper-content">
-                    <Route path={"/profile"} component={Profile}/>
-                    <Route path={"/dialogs"} component={Dialogs}/>
-                    <Route path={"/news"} component={News}/>
-                    <Route path={"/music"} component={Music}/>
+                    <Route path={"/profile"} render={() => <Profile postsData={postsData}/>}/>
+                    <Route path={"/dialogs"} render={() => <Dialogs dialogsData={dialogsData} messagesData={messagesData}/>}/>
+                    <Route path={"/news"} render={() => <News/>}/>
+                    <Route path={"/music"} render={() => <Music/>}/>
                 </div>
 
 
@@ -27,5 +31,3 @@ function App() {
         </BrowserRouter>
     );
 }
-
-export default App;

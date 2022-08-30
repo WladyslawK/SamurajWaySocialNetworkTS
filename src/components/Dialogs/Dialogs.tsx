@@ -3,22 +3,9 @@ import styles from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
 import {Message} from "./Message/Message";
 import {Dialog} from "./Dialog/Dialog";
+import {DialogsType} from "../../types";
 
-export const Dialogs = () => {
-    //BLL
-    const dialogsData = [
-        {id: 1, name: "Andrew"},
-        {id: 2, name: "Mike"},
-        {id: 3, name: "Dmytro"},
-        {id: 4, name: "Alex"},
-        {id: 5, name: "Albert"},
-    ]
-
-    const messagesData = [
-        {id: 1, name: "Hello"},
-        {id: 2, name: "How is your progress?"},
-        {id: 3, name: "Keep going"},
-    ]
+export const Dialogs: React.FC<DialogsType> = ({dialogsData, messagesData}) => {
 
     const dialogElements = dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id}/>)
     const messagesElements = messagesData.map(message => <Message id={message.id} message={message.name}/>)
