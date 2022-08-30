@@ -5,19 +5,32 @@ import {Message} from "./Message/Message";
 import {Dialog} from "./Dialog/Dialog";
 
 export const Dialogs = () => {
+    //BLL
+    const dialogsData = [
+        {id: 1, name: "Andrew"},
+        {id: 2, name: "Mike"},
+        {id: 3, name: "Dmytro"},
+        {id: 4, name: "Alex"},
+        {id: 5, name: "Albert"},
+    ]
+
+    const messagesData = [
+        {id: 1, name: "Hello"},
+        {id: 2, name: "How is your progress?"},
+        {id: 3, name: "Keep going"},
+    ]
+
+    const dialogElements = dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id}/>)
+    const messagesElements = messagesData.map(message => <Message id={message.id} message={message.name}/>)
+
+    //UI
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogs__items}>
-                <Dialog name={"Andrew"} path={"/dialogs/1"}/>
-                <Dialog name={"Mike"} path={"/dialogs/2"}/>
-                <Dialog name={"Dmytro"} path={"/dialogs/3"}/>
-                <Dialog name={"Alex"} path={"/dialogs/4"}/>
-                <Dialog name={"Albert"} path={"/dialogs/5"}/>
+                {dialogElements}
             </div>
             <div className={styles.dialogs__messages}>
-                <Message message={"Hi"}/>
-                <Message message={"How is your progress?"}/>
-                <Message message={"Keep going!"}/>
+                {messagesElements}
             </div>
         </div>
     )

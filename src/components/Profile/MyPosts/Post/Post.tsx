@@ -2,17 +2,19 @@ import React from 'react';
 import s from "./Post.module.css";
 
 type PostPropsType = {
-    message: string
+    id: number
+    text: string
+    likesCount: number
 }
 
-const Post = ({message}: PostPropsType) => {
+const Post: React.FC<PostPropsType> = ({id, text, likesCount}) => {
     return (
         <>
-            <div className={s.item}>
+            <div key={id} className={s.item}>
                 <img src="https://fera.pl/images/companies/1/charakter%20mopsa.jpg?1604065618661" alt="avatar"/>
-                {message}
+                {text}
                 <div>
-                    like
+                    likes: {likesCount}
                 </div>
             </div>
         </>

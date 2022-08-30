@@ -1,12 +1,13 @@
 import React from 'react';
 
 type MessageType = {
+    id: number
     message: string
 }
 
-export const Message: React.FC<MessageType> = ({message}) => {
+export const Message: React.FC<MessageType> = ({id, message}) => {
     return (
-        <div>
+        <div key={id}>
             {message}
         </div>
     );

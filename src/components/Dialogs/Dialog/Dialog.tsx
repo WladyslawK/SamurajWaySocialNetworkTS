@@ -4,13 +4,13 @@ import {NavLink} from "react-router-dom";
 
 type DialogType = {
     name: string
-    path: string
+    id: number
 }
 
-export const Dialog: React.FC<DialogType> = ({name, path}) => {
+export const Dialog: React.FC<DialogType> = ({name, id}) => {
     return (
         <div className={styles.dialogs__item}>
-            <NavLink to={path} activeClassName={styles.active}>{name}</NavLink>
+            <NavLink to={`/dialogs/${id}`} activeClassName={styles.active}>{name}</NavLink>
         </div>
     );
 };
