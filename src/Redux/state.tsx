@@ -1,3 +1,5 @@
+import {StateType} from "../types";
+
 export let state = {
     profilePage: {
         postsData: [
@@ -20,3 +22,14 @@ export let state = {
         ]
     }
 }
+
+export const reRenderCallback = (func: (state: StateType) => void) => {
+    rerenderEntireTree = func
+}
+let rerenderEntireTree: (state: StateType) => void
+
+export const addPost = (text: string) => {debugger
+    state.profilePage.postsData.push({id:5, text, likesCount: 0})
+    rerenderEntireTree(state)
+}
+console.log(state.profilePage.postsData)

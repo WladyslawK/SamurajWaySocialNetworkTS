@@ -25,17 +25,19 @@ type DialogsPageType = {
     messagesData:  MessageType[]
 }
 
-type StateType = {
+export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
 
 export type AppType = {
     state: StateType
+    addPost: (newPost: string) => void
 }
 
 export type ProfileType = {
     state: ProfilePageType
+    addPost: (newPost: string) => void
 }
 
 export type DialogsType = {
