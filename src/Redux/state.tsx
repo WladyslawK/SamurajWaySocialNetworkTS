@@ -28,8 +28,8 @@ export const reRenderCallback = (func: (state: StateType) => void) => {
 }
 let rerenderEntireTree: (state: StateType) => void
 
-export const addPost = (text: string) => {debugger
-    state.profilePage.postsData.push({id:5, text, likesCount: 0})
+export const addPost = (text: string) => {
+    state.profilePage.postsData.unshift({id:5, text, likesCount: 0})
     rerenderEntireTree(state)
 }
 console.log(state.profilePage.postsData)
