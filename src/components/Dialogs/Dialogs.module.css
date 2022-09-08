@@ -5,3 +5,17 @@
 .dialogs__items{
     padding: 10px;
 }
+.newMessageContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.newMessageContainer textarea {
+    width: 400px;
+    height: 20px;
+    margin-right: 10px;
+}
+.newMessageContainer button {
+    height: ;
+}
