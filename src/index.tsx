@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
-import {addPost, changePostText, reRenderCallback, state} from "./Redux/state";
+import {addPost, changePostText, subscriber, state} from "./Redux/state";
 import {StateType} from "./types";
 
 const rerender = (state: StateType) => {
@@ -12,4 +12,4 @@ const rerender = (state: StateType) => {
     );
 }
 rerender(state)
-reRenderCallback(rerender)
+subscriber(rerender)

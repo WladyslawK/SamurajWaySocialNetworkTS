@@ -25,8 +25,8 @@ export let state = {
     }
 }
 
-export const reRenderCallback = (func: (state: StateType) => void) => {
-    rerenderEntireTree = func
+export const subscriber = (observer: (state: StateType) => void) => {
+    rerenderEntireTree = observer // pattern observer / publisher subscriber
 }
 let rerenderEntireTree: (state: StateType) => void
 
