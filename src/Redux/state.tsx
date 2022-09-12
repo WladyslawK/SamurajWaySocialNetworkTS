@@ -5,8 +5,10 @@ export let state = {
         postsData: [
             {id: 1, text: "Hi", likesCount: 12},
             {id: 2, text: "How are you?", likesCount: 11},
-        ]
+        ],
+        newPostText: "IT",
     },
+
     dialogsPage: {
         dialogsData: [
             {id: 1, name: "Andrew"},
@@ -30,6 +32,12 @@ let rerenderEntireTree: (state: StateType) => void
 
 export const addPost = (text: string) => {
     state.profilePage.postsData.unshift({id:5, text, likesCount: 0})
+    state.profilePage.newPostText = ""
+    rerenderEntireTree(state)
+}
+
+export const changePostText = (text: string) => {
+    state.profilePage.newPostText = text
     rerenderEntireTree(state)
 }
 console.log(state.profilePage.postsData)

@@ -14,10 +14,11 @@ export type MessageType = {
     name: string
 }
 
-//typisation for state
+//typification for state
 
 type ProfilePageType = {
     postsData: PostType[]
+    newPostText: string
 }
 
 type DialogsPageType = {
@@ -33,13 +34,22 @@ export type StateType = {
 export type AppType = {
     state: StateType
     addPost: (newPost: string) => void
+    changePostText: (text: string) => void
 }
 
 export type ProfileType = {
-    state: ProfilePageType
+    profilePage: ProfilePageType
     addPost: (newPost: string) => void
+    changePostText: (text: string) => void
 }
 
 export type DialogsType = {
     state: DialogsPageType
+}
+
+export type MyPostsType = {
+    postsData: PostType[]
+    addPost: (newPost: string) => void
+    newPostText: string
+    changePostText: (text: string) => void
 }
