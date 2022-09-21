@@ -1,4 +1,4 @@
-import React, {RefObject, SetStateAction, useState} from 'react';
+import React, {RefObject} from 'react';
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {MyPostsType} from "../../../types";
