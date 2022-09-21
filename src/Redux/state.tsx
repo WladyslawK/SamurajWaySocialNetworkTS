@@ -1,4 +1,5 @@
-import {ActionType, StateType} from "../types";
+import {ActionType, StateType} from "../consts vs types/types";
+import {ADD_POST, UPDATE_NEW_POST_TEXT} from "../consts vs types/constants";
 
 export const store = {
     _state: {
@@ -22,7 +23,8 @@ export const store = {
                 {id: 1, name: "Hello"},
                 {id: 2, name: "How is your progress?"},
                 {id: 3, name: "Keep going"},
-            ]
+            ],
+            newMessageText: ""
         }
     },
 
@@ -49,15 +51,18 @@ export const store = {
     },*/
 
     dispatch(action: ActionType){
-        if(action.type === "ADD-POST"){
-            if(action.text)
-                this._state.profilePage.postsData.unshift({id:5, text: action.text, likesCount: 0})
+        if(action.type === ADD_POST){
+                this._state.profilePage.postsData.unshift({id:5, text: this._state.profilePage.newPostText, likesCount: 0})
             this._state.profilePage.newPostText = ""
             this._callSubscriber(this._state)
         }
-        else if(action.type === "UPDATE-NEW-POST-TEXT"){
+        else if(action.type === UPDATE_NEW_POST_TEXT){
             if(action.text)this._state.profilePage.newPostText = action.text
             this._callSubscriber(this._state)
         }
     }
 }
+
+export const addPostActionCreator = () => ({type: ADD_POST})
+
+export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, text: newText})

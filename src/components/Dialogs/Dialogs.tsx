@@ -3,7 +3,7 @@ import styles from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
 import {Message} from "./Message/Message";
 import {Dialog} from "./Dialog/Dialog";
-import {DialogsType} from "../../types";
+import {DialogsType} from "../../consts vs types/types";
 
 export const Dialogs: React.FC<DialogsType> = ({state}) => {
 

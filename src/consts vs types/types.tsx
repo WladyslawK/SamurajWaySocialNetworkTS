@@ -24,6 +24,7 @@ type ProfilePageType = {
 type DialogsPageType = {
     dialogsData: DialogType[]
     messagesData:  MessageType[]
+    newMessageText: string
 }
 
 export type StateType = {

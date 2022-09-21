@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
 import {store} from "./Redux/state";
-import {StateType} from "./types";
+import {StateType} from "./consts vs types/types";
 
 const rerender = (state: StateType) => {
     ReactDOM.render(
