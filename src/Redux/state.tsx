@@ -1,4 +1,4 @@
-import {StateType} from "../types";
+import {ActionType, StateType} from "../types";
 
 export const store = {
     _state: {
@@ -38,13 +38,26 @@ export const store = {
         this._callSubscriber = observer
     },
 
-    addPost(text: string){
+   /* _addPost(text: string){
         this._state.profilePage.postsData.unshift({id:5, text, likesCount: 0})
         this._state.profilePage.newPostText = ""
         this._callSubscriber(this._state)
     },
-    changePostText(text: string){
+    _changePostText(text: string){
         this._state.profilePage.newPostText = text
         this._callSubscriber(this._state)
+    },*/
+
+    dispatch(action: ActionType){
+        if(action.type === "ADD-POST"){
+            if(action.text)
+                this._state.profilePage.postsData.unshift({id:5, text: action.text, likesCount: 0})
+            this._state.profilePage.newPostText = ""
+            this._callSubscriber(this._state)
+        }
+        else if(action.type === "UPDATE-NEW-POST-TEXT"){
+            if(action.text)this._state.profilePage.newPostText = action.text
+            this._callSubscriber(this._state)
+        }
     }
 }

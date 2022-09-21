@@ -33,14 +33,12 @@ export type StateType = {
 
 export type AppType = {
     state: StateType
-    addPost: (newPost: string) => void
-    changePostText: (text: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 export type ProfileType = {
     profilePage: ProfilePageType
-    addPost: (newPost: string) => void
-    changePostText: (text: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 export type DialogsType = {
@@ -49,7 +47,10 @@ export type DialogsType = {
 
 export type MyPostsType = {
     postsData: PostType[]
-    addPost: (newPost: string) => void
     newPostText: string
-    changePostText: (text: string) => void
+    dispatch: (action: ActionType) => void
+}
+export type ActionType = {
+    type: string
+    text?: string
 }

@@ -7,7 +7,7 @@ import {StateType} from "./types";
 
 const rerender = (state: StateType) => {
     ReactDOM.render(
-        <App state={store.getState()} addPost={store.addPost.bind(store)} changePostText={store.changePostText.bind(store)}/>,
+        <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>,
         document.getElementById('root')
     );
 }

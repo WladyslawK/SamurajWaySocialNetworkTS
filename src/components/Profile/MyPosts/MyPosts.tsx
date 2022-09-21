@@ -3,20 +3,21 @@ import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {MyPostsType} from "../../../types";
 
-export const MyPosts: React.FC<MyPostsType> = ({postsData, addPost, newPostText, changePostText}) => {
+export const MyPosts: React.FC<MyPostsType> = ({postsData, newPostText, dispatch}) => {
 
-    const postsElements = postsData.map(post => <Post key={post.id} id={post.id} text={post.text} likesCount={post.likesCount}/>)
+    const postsElements = postsData.map(post => <Post key={post.id} id={post.id} text={post.text}
+                                                      likesCount={post.likesCount}/>)
     let newPostTextReference: RefObject<HTMLTextAreaElement> = React.createRef()
 
-    const  addNewPostHandler = () =>{
+    const addNewPostHandler = () => {
         const newPost = newPostTextReference.current?.value
-        if(newPost) {
-            addPost(newPost)
+        if (newPost) {
+            dispatch({type: "ADD-POST", text: newPost})
         }
     }
 
     const onChangeHandler = () => {
-        changePostText(newPostTextReference.current?.value as string)
+        dispatch({type: "UPDATE-NEW-POST-TEXT", text: newPostTextReference.current?.value})
     }
 
     return (
