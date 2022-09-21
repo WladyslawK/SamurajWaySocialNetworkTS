@@ -11,7 +11,7 @@ export type DialogType = {
 
 export type MessageType = {
     id: number
-    name: string
+    text: string
 }
 
 //typification for state
@@ -44,6 +44,7 @@ export type ProfileType = {
 
 export type DialogsType = {
     state: DialogsPageType
+    dispatch: (action: ActionType) => void
 }
 
 export type MyPostsType = {

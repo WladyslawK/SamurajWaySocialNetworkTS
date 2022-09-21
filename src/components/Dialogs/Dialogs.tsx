@@ -4,15 +4,22 @@ import {NavLink} from "react-router-dom";
 import {Message} from "./Message/Message";
 import {Dialog} from "./Dialog/Dialog";
 import {DialogsType} from "../../consts vs types/types";
+import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../Redux/state";
 
-export const Dialogs: React.FC<DialogsType> = ({state}) => {
+export const Dialogs: React.FC<DialogsType> = ({state, dispatch}) => {
 
     const dialogElements = state.dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id}/>)
-    const messagesElements = state.messagesData.map(message => <Message id={message.id} message={message.name}/>)
+    const messagesElements = state.messagesData.map(message => <Message id={message.id} message={message.text}/>)
 
     const newMessageReference: RefObject<HTMLTextAreaElement> = React.createRef()
+
+    const changeNewMessageTextHandler = () => {
+        if(newMessageReference.current?.value)
+        dispatch(updateNewMessageTextActionCreator(newMessageReference.current?.value))
+    }
+
     const addNewMessageHandler = () => {
-        alert(newMessageReference.current?.value)
+        dispatch(addNewMessageActionCreator())
     }
 
 
@@ -28,7 +35,7 @@ export const Dialogs: React.FC<DialogsType> = ({state}) => {
                 </div>
             </div>
             <div className={styles.newMessageContainer}>
-                <textarea ref={newMessageReference}></textarea>
+                <textarea value={state.newMessageText} onChange={changeNewMessageTextHandler} ref={newMessageReference}></textarea>
                 <button onClick={addNewMessageHandler}>Send</button>
             </div>
         </>
