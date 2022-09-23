@@ -61,13 +61,3 @@ export const store = {
         this._callSubscriber(this._state)
     }
 }
-
-export const addPostActionCreator = () => {
-    return {type: ADD_POST}
-}
-
-export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, text: newText})
-
-export const updateNewMessageTextActionCreator = (newText: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, text: newText})
-
-export const addNewMessageActionCreator = () => ({type: ADD_NEW_MESSAGE})

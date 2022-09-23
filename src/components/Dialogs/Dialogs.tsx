@@ -1,10 +1,9 @@
 import React, {RefObject} from "react";
 import styles from "./Dialogs.module.css"
-import {NavLink} from "react-router-dom";
 import {Message} from "./Message/Message";
 import {Dialog} from "./Dialog/Dialog";
 import {DialogsType} from "../../consts vs types/types";
-import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../Redux/state";
+import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../Redux/dialogsPageReducer";
 
 export const Dialogs: React.FC<DialogsType> = ({state, dispatch}) => {
 

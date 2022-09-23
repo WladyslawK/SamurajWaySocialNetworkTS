@@ -2,7 +2,7 @@ import React, {RefObject} from 'react';
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {MyPostsType} from "../../../consts vs types/types";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/state";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/profilePageReducer";
 
 export const MyPosts: React.FC<MyPostsType> = ({postsData, newPostText, dispatch}) => {
 
