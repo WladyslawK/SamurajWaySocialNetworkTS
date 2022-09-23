@@ -16,12 +16,12 @@ export type MessageType = {
 
 //typification for state
 
-type ProfilePageType = {
+export type ProfilePageType = {
     postsData: PostType[]
     newPostText: string
 }
 
-type DialogsPageType = {
+export type DialogsPageType = {
     dialogsData: DialogType[]
     messagesData:  MessageType[]
     newMessageText: string

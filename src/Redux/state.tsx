@@ -1,5 +1,8 @@
 import {ActionType, StateType} from "../consts vs types/types";
 import {ADD_NEW_MESSAGE, ADD_POST, UPDATE_NEW_MESSAGE_TEXT, UPDATE_NEW_POST_TEXT} from "../consts vs types/constants";
+import {profilePageReducer} from "./profilePageReducer";
+import {dialogsPageReducer} from "./dialogsPageReducer";
+import {debuglog} from "util";
 
 export const store = {
     _state: {
@@ -51,26 +54,17 @@ export const store = {
      },*/
 
     dispatch(action: ActionType) {
-        if (action.type === ADD_POST) {
-            this._state.profilePage.postsData.unshift({id: 5, text: this._state.profilePage.newPostText, likesCount: 0})
-            this._state.profilePage.newPostText = ""
-            this._callSubscriber(this._state)
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            if (action.text) this._state.profilePage.newPostText = action.text
-            this._callSubscriber(this._state)
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            if (action.text)
-                this._state.dialogsPage.newMessageText = action.text
-            this._callSubscriber(this._state)
-        } else if (action.type === ADD_NEW_MESSAGE) {
-            this._state.dialogsPage.messagesData.push({id: 5, text: this._state.dialogsPage.newMessageText})
-            this._state.dialogsPage.newMessageText = ""
-            this._callSubscriber(this._state)
-        }
+
+        profilePageReducer(this._state.profilePage, action)
+        dialogsPageReducer(this._state.dialogsPage, action)
+
+        this._callSubscriber(this._state)
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST})
+export const addPostActionCreator = () => {
+    return {type: ADD_POST}
+}
 
 export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, text: newText})
 
