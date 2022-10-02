@@ -52,10 +52,17 @@ export type DialogsType = {
     dispatch: (action: ActionType) => void
 }
 
-export type MyPostsType = {
+export type MyPostsContainerType = {
     postsData: PostType[]
     newPostText: string
     dispatch: (action: ActionType) => void
+}
+
+export type MyPostsType = {
+    postsData: PostType[]
+    newPostText: string
+    addPost: () => void
+    updateText: (text: string) => void
 }
 
 export type ActionType = {
