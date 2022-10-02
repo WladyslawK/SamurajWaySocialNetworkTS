@@ -47,9 +47,17 @@ export type ProfileType = {
     dispatch: (action: ActionType) => void
 }
 
-export type DialogsType = {
+export type DialogsContainerType = {
     state: DialogsPageType
     dispatch: (action: ActionType) => void
+}
+
+export type DialogsType = {
+    dialogsData: DialogType[]
+    messagesData: MessageType[]
+    newMessageText: string
+    updateNewMessText: (text: string) => void
+    sendNewMessage: () => void
 }
 
 export type MyPostsContainerType = {

@@ -3,24 +3,24 @@ import styles from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {Dialog} from "./Dialog/Dialog";
 import {DialogsType} from "../../consts vs types/types";
-import {addNewMessageAC, updateNewMessageTextAC} from "../../Redux/dialogsPageReducer";
 
-export const Dialogs: React.FC<DialogsType> = ({state, dispatch}) => {
+export const Dialogs: React.FC<DialogsType> = (props) => {
 
-    const dialogElements = state.dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id}/>)
-    const messagesElements = state.messagesData.map(message => <Message id={message.id} message={message.text}/>)
+    const dialogElements = props.dialogsData.map(dialog =>
+        <Dialog
+            name={dialog.name}
+            id={dialog.id}
+        />)
+
+    const messagesElements = props.messagesData.map(message =>
+        <Message
+            id={message.id}
+            message={message.text}
+        />)
 
     const newMessageReference: RefObject<HTMLTextAreaElement> = React.createRef()
 
-    const changeNewMessageTextHandler = () => {
-        if(newMessageReference.current?.value)
-        dispatch(updateNewMessageTextAC(newMessageReference.current?.value))
-    }
-
-    const addNewMessageHandler = () => {
-        dispatch(addNewMessageAC())
-    }
-
+    const updateNewMessageHandler = () => props.updateNewMessText(newMessageReference.current?.value as string)
 
     //UI
     return (
@@ -34,8 +34,12 @@ export const Dialogs: React.FC<DialogsType> = ({state, dispatch}) => {
                 </div>
             </div>
             <div className={styles.newMessageContainer}>
-                <textarea value={state.newMessageText} onChange={changeNewMessageTextHandler} ref={newMessageReference}></textarea>
-                <button onClick={addNewMessageHandler}>Send</button>
+                <textarea
+                    value={props.newMessageText}
+                    onChange={updateNewMessageHandler}
+                    ref={newMessageReference}>
+                </textarea>
+                <button onClick={props.sendNewMessage}>Send</button>
             </div>
         </>
 

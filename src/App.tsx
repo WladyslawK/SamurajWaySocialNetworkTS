@@ -8,6 +8,7 @@ import {BrowserRouter, Route, Router} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {AppType} from "./consts vs types/types";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 
@@ -22,7 +23,7 @@ export const App: React.FC<AppType> = ({state, dispatch}) => {
 
                 <div className="app-wrapper-content">
                     <Route path={"/profile"} render={() => <Profile profilePage={state.profilePageReducer} dispatch={dispatch}/>}/>
-                    <Route path={"/dialogs"} render={() => <Dialogs state={state.dialogsPageReducer} dispatch={dispatch} />}/>
+                    <Route path={"/dialogs"} render={() => <DialogsContainer state={state.dialogsPageReducer} dispatch={dispatch} />}/>
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
                 </div>
