@@ -3,7 +3,7 @@ import styles from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {Dialog} from "./Dialog/Dialog";
 import {DialogsType} from "../../consts vs types/types";
-import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../Redux/dialogsPageReducer";
+import {addNewMessageAC, updateNewMessageTextAC} from "../../Redux/dialogsPageReducer";
 
 export const Dialogs: React.FC<DialogsType> = ({state, dispatch}) => {
 
@@ -14,11 +14,11 @@ export const Dialogs: React.FC<DialogsType> = ({state, dispatch}) => {
 
     const changeNewMessageTextHandler = () => {
         if(newMessageReference.current?.value)
-        dispatch(updateNewMessageTextActionCreator(newMessageReference.current?.value))
+        dispatch(updateNewMessageTextAC(newMessageReference.current?.value))
     }
 
     const addNewMessageHandler = () => {
-        dispatch(addNewMessageActionCreator())
+        dispatch(addNewMessageAC())
     }
 
 

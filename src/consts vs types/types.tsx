@@ -1,3 +1,7 @@
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../Redux/profilePageReducer";
+import {addNewMessageAC, updateNewMessageTextAC} from "../Redux/dialogsPageReducer";
+import {AppDispatch, ReduxStateType, store} from "../Redux/redux-store";
+
 export type PostType = {
     id: number
     text: string
@@ -33,8 +37,9 @@ export type StateType = {
 }
 
 export type AppType = {
-    state: StateType
-    dispatch: (action: ActionType) => void
+    state: ReduxStateType
+    dispatch: AppDispatch
+
 }
 
 export type ProfileType = {
@@ -52,7 +57,13 @@ export type MyPostsType = {
     newPostText: string
     dispatch: (action: ActionType) => void
 }
+
 export type ActionType = {
     type: string
-    text?: string
+    newText?: string
 }
+
+
+/*
+export type ActionType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator> | ReturnType<typeof addNewMessageActionCreator> | ReturnType<typeof updateNewMessageTextActionCreator>
+*/

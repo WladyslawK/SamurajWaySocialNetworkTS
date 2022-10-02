@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
-import {store} from "./Redux/state";
+import {ReduxStateType, store} from "./Redux/redux-store";
 import {StateType} from "./consts vs types/types";
 
-const rerender = (state: StateType) => {
+const rerender = (state: ReduxStateType) => {
     ReactDOM.render(
-        <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>,
+        <App state={state} dispatch={store.dispatch.bind(store)}/>,
         document.getElementById('root')
     );
 }
 rerender(store.getState())
-store.subscriber(rerender)
+store.subscribe(() => rerender(store.getState()))
