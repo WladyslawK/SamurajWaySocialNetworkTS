@@ -10,9 +10,6 @@ import {AppType} from "./consts vs types/types";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
-
-
-
 export const App: React.FC<AppType> = ({state, dispatch}) => {
     return (
         <BrowserRouter>
@@ -20,8 +17,10 @@ export const App: React.FC<AppType> = ({state, dispatch}) => {
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path={"/profile"} render={() => <Profile profilePage={state.profilePageReducer} dispatch={dispatch}/>}/>
-                    <Route path={"/dialogs"} render={() => <DialogsContainer />}/> {/*state={state.dialogsPageReducer} dispatch={dispatch}*/}
+                    <Route path={"/profile"}
+                           render={() => <Profile profilePage={state.profilePageReducer} dispatch={dispatch}/>}/>
+                    <Route path={"/dialogs"} render={() =>
+                        <DialogsContainer/>}/>
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
                 </div>

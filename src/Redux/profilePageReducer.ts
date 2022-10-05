@@ -1,4 +1,4 @@
-import { ProfilePageType} from "../consts vs types/types";
+import {ProfilePageType} from "../consts vs types/types";
 import {ADD_POST, UPDATE_NEW_POST_TEXT} from "../consts vs types/constants";
 import {ActionsType} from "./redux-store";
 
@@ -26,6 +26,6 @@ export type addPostActionCreatorType = ReturnType<typeof addPostActionCreator>
 
 export type updateNewPostTextActionCreator = ReturnType<typeof updateNewPostTextActionCreator>
 
-export const addPostActionCreator = () => ( {type: ADD_POST } as const)
+export const addPostActionCreator = () => ({type: ADD_POST} as const)
 
 export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const)
