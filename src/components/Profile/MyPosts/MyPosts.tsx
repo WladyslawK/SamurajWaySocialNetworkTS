@@ -5,7 +5,7 @@ import {MyPostsType} from "../../../consts vs types/types";
 
 export const MyPosts: React.FC<MyPostsType> = ({postsData, newPostText, addPost, updateText}) => {
 
-    const postsElements = postsData.map(post =>
+    const postsElements = postsData && postsData.map(post =>
         <Post
             key={post.id}
             id={post.id}

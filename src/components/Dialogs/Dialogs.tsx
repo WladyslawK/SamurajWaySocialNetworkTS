@@ -5,14 +5,15 @@ import {Dialog} from "./Dialog/Dialog";
 import {DialogsType} from "../../consts vs types/types";
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
+    console.log(props)
 
-    const dialogElements = props.dialogsData.map(dialog =>
+    const dialogElements = props.dialogsData && props.dialogsData.map(dialog =>
         <Dialog
             name={dialog.name}
             id={dialog.id}
         />)
 
-    const messagesElements = props.messagesData.map(message =>
+    const messagesElements = props.messagesData && props.messagesData.map(message =>
         <Message
             id={message.id}
             message={message.text}

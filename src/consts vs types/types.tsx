@@ -1,6 +1,4 @@
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../Redux/profilePageReducer";
-import {addNewMessageAC, updateNewMessageTextAC} from "../Redux/dialogsPageReducer";
-import {AppDispatch, ReduxStateType, store} from "../Redux/redux-store";
+import {ActionsType, AppDispatch, ReduxStateType, store} from "../Redux/redux-store";
 
 export type PostType = {
     id: number
@@ -44,12 +42,12 @@ export type AppType = {
 
 export type ProfileType = {
     profilePage: ProfilePageType
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export type DialogsContainerType = {
     state: DialogsPageType
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export type DialogsType = {
@@ -63,7 +61,7 @@ export type DialogsType = {
 export type MyPostsContainerType = {
     postsData: PostType[]
     newPostText: string
-    dispatch: (action: ActionType) => void
+    dispatch: (action: any) => void
 }
 
 export type MyPostsType = {
@@ -73,10 +71,9 @@ export type MyPostsType = {
     updateText: (text: string) => void
 }
 
-export type ActionType = {
-    type: string
-    newText?: string
-}
+// export type ActionType = {
+//     type: string
+// }
 
 
 /*

@@ -1,14 +1,14 @@
 import React from "react";
-import {DialogsContainerType} from "../../consts vs types/types";
-import {addNewMessageAC, updateNewMessageTextAC} from "../../Redux/dialogsPageReducer";
+import {sendNewMessageAC, updateNewMessageTextAC} from "../../Redux/dialogsPageReducer";
 import {Dialogs} from "./Dialogs";
+import {connect} from "react-redux";
+import {AppDispatch, ReduxStateType} from "../../Redux/redux-store";
 
-export const DialogsContainer: React.FC<DialogsContainerType> = ({state, dispatch}) => {
+/*export const DialogsContainer: React.FC<DialogsContainerType> = ({state, dispatch}) => {
 
     const updateNewMessage = (text: string) => dispatch(updateNewMessageTextAC(text))
 
-    const sendNewMessage = () => dispatch(addNewMessageAC())
-
+    const sendNewMessage = () => dispatch(sendNewMessageAC())
 
     //UI
     return (
@@ -23,4 +23,17 @@ export const DialogsContainer: React.FC<DialogsContainerType> = ({state, dispatc
         </>
 
     )
-}
+}*/
+
+const mapStateToProps = (state: ReduxStateType) => ({
+    dialogsData: state.dialogsPageReducer.dialogsData,
+    messagesData: state.dialogsPageReducer.messagesData,
+    newMessageText: state.dialogsPageReducer.newMessageText
+})
+
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+        updateNewMessText: (text: string) => dispatch(updateNewMessageTextAC(text)),
+        sendNewMessage: () => dispatch(sendNewMessageAC())
+    })
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)

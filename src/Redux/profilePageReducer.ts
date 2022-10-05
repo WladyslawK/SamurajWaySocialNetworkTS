@@ -1,5 +1,6 @@
-import {ActionType, ProfilePageType} from "../consts vs types/types";
+import { ProfilePageType} from "../consts vs types/types";
 import {ADD_POST, UPDATE_NEW_POST_TEXT} from "../consts vs types/constants";
+import {ActionsType} from "./redux-store";
 
 let initialState = {
     postsData: [
@@ -9,16 +10,13 @@ let initialState = {
     newPostText: "IT",
 }
 
-export const profilePageReducer = (state: ProfilePageType = initialState, action: ActionType) => {
+export const profilePageReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
 
     switch (action.type) {
         case UPDATE_NEW_POST_TEXT:
-            if (action.newText) state.newPostText = action.newText
-            return {...state}
+            return {...state, newPostText: action.newText}
         case ADD_POST:
-            state.postsData.unshift({id: 6, text: state.newPostText, likesCount: 0})
-            state.newPostText = ""
-            return {...state}
+            return {postsData: [{id: 6, text: state.newPostText, likesCount: 0}, ...state.postsData], newPostText: ""}
         default:
             return state
     }
@@ -28,8 +26,6 @@ export type addPostActionCreatorType = ReturnType<typeof addPostActionCreator>
 
 export type updateNewPostTextActionCreator = ReturnType<typeof updateNewPostTextActionCreator>
 
-export const addPostActionCreator = () => {
-    return {type: ADD_POST}
-}
+export const addPostActionCreator = () => ( {type: ADD_POST } as const)
 
-export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText})
+export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const)

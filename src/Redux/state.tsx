@@ -1,8 +1,9 @@
-import {ActionType, StateType} from "../consts vs types/types";
+import {StateType} from "../consts vs types/types";
 import {ADD_NEW_MESSAGE, ADD_POST, UPDATE_NEW_MESSAGE_TEXT, UPDATE_NEW_POST_TEXT} from "../consts vs types/constants";
 import {profilePageReducer} from "./profilePageReducer";
 import {dialogsPageReducer} from "./dialogsPageReducer";
 import {debuglog} from "util";
+import {ActionsType} from "./redux-store";
 
 export const store = {
     _state: {
@@ -53,7 +54,7 @@ export const store = {
          this._callSubscriber(this._state)
      },*/
 
-    dispatch(action: ActionType) {
+    dispatch(action: ActionsType) {
 
         profilePageReducer(this._state.profilePage, action)
         dialogsPageReducer(this._state.dialogsPage, action)
