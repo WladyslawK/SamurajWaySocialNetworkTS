@@ -8,6 +8,7 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {AppType} from "./consts vs types/types";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 
 export const App: React.FC<AppType> = ({state, dispatch}) => {
@@ -21,6 +22,7 @@ export const App: React.FC<AppType> = ({state, dispatch}) => {
                            render={() => <Profile profilePage={state.profilePageReducer} dispatch={dispatch}/>}/>
                     <Route path={"/dialogs"} render={() =>
                         <DialogsContainer/>}/>
+                    <Route path={"/users"} render={() => <UsersContainer/>}/>
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
                 </div>
