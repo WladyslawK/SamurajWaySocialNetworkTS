@@ -1,5 +1,3 @@
-import {ActionsType} from "./redux-store";
-
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_STATE = "SET-STATE"

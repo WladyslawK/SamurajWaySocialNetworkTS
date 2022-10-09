@@ -11,7 +11,6 @@ type UsersComponentType = {
 
 export const Users: React.FC<UsersComponentType> = ({usersInfo, followUser, unfollowUser, setUsersState}) => {
 
-debugger
     const users = [
         {
             userId: 1,
@@ -48,7 +47,6 @@ debugger
     ]
 
     if(usersInfo.users.length === 0) setUsersState(users)
-debugger
     return (
         <div>
             {

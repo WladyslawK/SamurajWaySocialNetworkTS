@@ -2,7 +2,6 @@ import {DialogsPageType, DialogType, MessageType} from "../consts vs types/types
 import {ADD_NEW_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from "../consts vs types/constants";
 import {ActionsType} from "./redux-store";
 
-
 let initialState = {
     dialogsData: [
         {id: 1, name: "Andrew"},
@@ -20,7 +19,7 @@ let initialState = {
 }
 
 
-export const dialogsPageReducer = (state: DialogsPageType = initialState, action: ActionsType) => {
+export const dialogsPageReducer = (state: DialogsPageType = initialState, action: DialogsPageActionsType) => {
     switch(action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
              return {...state, newMessageText: action.newText}
@@ -31,10 +30,10 @@ export const dialogsPageReducer = (state: DialogsPageType = initialState, action
     }
 }
 
-export type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
+export type DialogsPageActionsType = updateNewMessageTextACType | sendNewMessageACType
 
-export type addNewMessageACType = ReturnType<typeof sendNewMessageAC>
-
+type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
 export const updateNewMessageTextAC = (newText: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText} as const)
 
+type sendNewMessageACType = ReturnType<typeof sendNewMessageAC>
 export const sendNewMessageAC = () => ({type: ADD_NEW_MESSAGE} as const)

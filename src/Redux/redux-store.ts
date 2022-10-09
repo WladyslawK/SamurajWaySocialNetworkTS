@@ -1,10 +1,10 @@
 import {combineReducers, createStore, Store} from "redux";
-import {addNewMessageACType, dialogsPageReducer, updateNewMessageTextACType} from "./dialogsPageReducer";
-import {addPostActionCreatorType, profilePageReducer, updateNewPostTextActionCreator} from "./profilePageReducer";
+import {dialogsPageReducer, DialogsPageActionsType} from "./dialogsPageReducer";
+import { ProfilePageActionsType, profilePageReducer} from "./profilePageReducer";
 import {UsersActionsType, usersReducer} from "./usersReducer";
 
 
-export type ActionsType = addPostActionCreatorType | updateNewPostTextActionCreator | updateNewMessageTextACType | addNewMessageACType | UsersActionsType
+export type ActionsType = ProfilePageActionsType | DialogsPageActionsType | UsersActionsType
 
 export type AppDispatch = typeof store.dispatch
 

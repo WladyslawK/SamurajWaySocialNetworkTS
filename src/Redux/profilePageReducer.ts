@@ -10,7 +10,7 @@ let initialState = {
     newPostText: "IT",
 }
 
-export const profilePageReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
+export const profilePageReducer = (state: ProfilePageType = initialState, action: ProfilePageActionsType) => {
 
     switch (action.type) {
         case UPDATE_NEW_POST_TEXT:
@@ -22,9 +22,11 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
     }
 }
 
-export type addPostActionCreatorType = ReturnType<typeof addPostActionCreator>
+export type ProfilePageActionsType = addPostActionCreatorType | updateNewPostTextActionCreator
 
-export type updateNewPostTextActionCreator = ReturnType<typeof updateNewPostTextActionCreator>
+type addPostActionCreatorType = ReturnType<typeof addPostActionCreator>
+
+type updateNewPostTextActionCreator = ReturnType<typeof updateNewPostTextActionCreator>
 
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
 
