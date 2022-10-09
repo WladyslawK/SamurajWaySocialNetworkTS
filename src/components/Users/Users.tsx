@@ -3,20 +3,56 @@ import {UsersPageType, UsersType} from "../../Redux/usersReducer";
 import style from "./Users.module.css"
 
 type UsersComponentType = {
-    usersInfo: UsersType[]
+    usersInfo: UsersPageType
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
+    setUsersState: (users: UsersType[]) => void
 }
 
-export const Users: React.FC<UsersComponentType> = ({usersInfo, followUser, unfollowUser}) => {
+export const Users: React.FC<UsersComponentType> = ({usersInfo, followUser, unfollowUser, setUsersState}) => {
 
+debugger
+    const users = [
+        {
+            userId: 1,
+            followed: true,
+            userFirstName: "Andrew",
+            userSecondName: "Woronin",
+            status: "Front End Developer",
+            location: {city: "Warsaw", country: "Poland"}
+        },
+        {
+            userId: 2,
+            followed: false,
+            userFirstName: "Jan",
+            userSecondName: "Kowalski",
+            status: "Front End Developer",
+            location: {city: "Krakow", country: "Poland"}
+        },
+        {
+            userId: 3,
+            followed: true,
+            userFirstName: "Aleksandr",
+            userSecondName: "Szlak",
+            status: "Front End Developer",
+            location: {city: "Verona", country: "Italy"}
+        },
+        {
+            userId: 4,
+            followed: false,
+            userFirstName: "Pawel",
+            userSecondName: "Goral",
+            status: "Front End Developer",
+            location: {city: "Porto", country: "Portugal"}
+        },
+    ]
 
-
-
+    if(usersInfo.users.length === 0) setUsersState(users)
+debugger
     return (
         <div>
             {
-                usersInfo && usersInfo.map(user => {
+                usersInfo && usersInfo.users.map(user => {
                     return (
                         <div className={style.userContainer} key={user.userId}>
                             <span>

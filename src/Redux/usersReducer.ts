@@ -59,18 +59,20 @@ const initialState: UsersPageType ={
     ]
 }
 
-export const usersReducer = (state: UsersPageType = initialState, action: ActionsType) => {
+export const usersReducer = (state: UsersPageType = {users: []}, action: UsersActionsType) => {
     switch (action.type) {
         case FOLLOW:
-            return {...state, users: state.users.map(user => user.userId === action.payload.userId ? {...user, followed: true} : user)}
+            return {...state, users: state.users.map(user => user.userId === action.payload.userId  ? {...user, followed: true} : user)}
         case UNFOLLOW:
             return {...state, users: state.users.map(user => user.userId === action.payload.userId ? {...user, followed: false} : user)}
+        case SET_STATE:
+            return {...state, users: [...state.users, ...action.payload.users]}
         default:
             return state
     }
 }
 
-export type UsersActionsType = FollowACType | UnfollowACType
+export type UsersActionsType = FollowACType | UnfollowACType | SetUserStateType
 
 type FollowACType = ReturnType<typeof followAC>
 export const followAC = (userId: number) => {
@@ -88,6 +90,16 @@ export const unfollowAC = (userId: number) => {
         type: UNFOLLOW,
         payload: {
             userId
+        }
+    } as const
+}
+
+type SetUserStateType = ReturnType<typeof setUserState>
+export const setUserState = (users: UsersType[]) => {
+    return {
+        type: SET_STATE,
+        payload: {
+            users
         }
     } as const
 }
