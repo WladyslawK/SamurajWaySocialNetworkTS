@@ -56,8 +56,8 @@ export const store = {
 
     dispatch(action: ActionsType) {
 
-        profilePageReducer(this._state.profilePage, action)
-        dialogsPageReducer(this._state.dialogsPage, action)
+        /*profilePageReducer(this._state.profilePage, action)
+        dialogsPageReducer(this._state.dialogsPage, action)*/
 
         this._callSubscriber(this._state)
     }
