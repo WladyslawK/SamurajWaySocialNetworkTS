@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {Users} from "./Users";
+import {UsersOptionalFunctionalComponent} from "./Users(optionalFunctionalComponent)";
 import {AppDispatch, ReduxStateType} from "../../Redux/redux-store";
-import {followAC, setUserState, unfollowAC, UsersType} from "../../Redux/usersReducer";
+import {followAC, setUserState, unfollowAC, UsersPageType, UsersType} from "../../Redux/usersReducer";
+import {Users} from "./Users";
 
 const mapStateToProps = (state: ReduxStateType) => {
 
