@@ -3,3 +3,11 @@
     height: 80px;
     border-radius: 50%;
 }
+.selected{
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.span{
+    cursor: pointer;
+}

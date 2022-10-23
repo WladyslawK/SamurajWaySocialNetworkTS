@@ -4,26 +4,59 @@ import axios from "axios";
 import {UsersPageType, UsersType} from "../../Redux/usersReducer";
 
 type UsersComponentType = {
-    usersInfo: UsersPageType
+    users: UsersType[]
+    totalUsersCount: number
+    pagesCount: number
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
     setUsersState: (users: UsersType[]) => void
+    setCurrentPage: (page: number) => void
+    currentPage: number
+    setTotalUsersCount: (count: number) => void
 }
 
 export class Users extends React.Component<UsersComponentType, {}> {
-
     constructor(props: UsersComponentType) {
         super(props);
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => this.props.setUsersState(response.data.items))
+    }
 
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}`)
+            .then(response => {
+                console.log(response)
+                this.props.setUsersState(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            })
+    }
+
+    changePage = (page: number) => {
+        this.props.setCurrentPage(page)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}`)
+            .then(response => {
+                this.props.setUsersState(response.data.items)
+            })
     }
 
     render() {
+
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pagesCount)
+        const pagination = []
+
+        for (let i = 1; i <= pagesCount; i++) {
+            pagination.push(i)
+        }
+
         return (
             <div>
+                <div>
+                    {
+                        pagination.map((element, i) => <span key={i} className={element === this.props.currentPage ? `${style.selected} ${style.span}` : `${style.span}`} onClick={() => {
+                            this.changePage(element)
+                        }}>{element}</span>)
+                    }
+                </div>
                 {
-                    this.props.usersInfo && this.props.usersInfo.users.map(user => {
+                    this.props.users && this.props.users.map(user => {
                         return (
                             <div className={style.userContainer} key={user.id}>
                             <span>
