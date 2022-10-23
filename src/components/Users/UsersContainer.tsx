@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {UsersOptionalFunctionalComponent} from "./Users(optionalFunctionalComponent)";
 import {AppDispatch, ReduxStateType} from "../../Redux/redux-store";
 import {
     changeCurrentPageAC,
@@ -10,7 +9,59 @@ import {
     unfollowAC,
     UsersType
 } from "../../Redux/usersReducer";
+import axios from "axios";
 import {Users} from "./Users";
+
+
+type UsersAPIComponentType = {
+    users: UsersType[]
+    totalUsersCount: number
+    pagesCount: number
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
+    setUsersState: (users: UsersType[]) => void
+    setCurrentPage: (page: number) => void
+    currentPage: number
+    setTotalUsersCount: (count: number) => void
+}
+
+class UsersAPIContainer extends React.Component<UsersAPIComponentType, {}> {
+    constructor(props: UsersAPIComponentType) {
+        super(props);
+    }
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}`)
+            .then(response => {
+                console.log(response)
+                this.props.setUsersState(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            })
+    }
+
+    changePage = (page: number) => {
+        this.props.setCurrentPage(page)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}`)
+            .then(response => {
+                this.props.setUsersState(response.data.items)
+            })
+    }
+
+    render() {
+        return (
+            <Users
+                users={this.props.users}
+                totalUsersCount={this.props.totalUsersCount}
+                setTotalUsersCount={this.props.setTotalUsersCount}
+                pagesCount={this.props.pagesCount}
+                currentPage={this.props.currentPage}
+                followUser={this.props.followUser}
+                changePage={this.changePage}
+                unfollowUser={this.props.unfollowUser}/>
+        );
+    }
+
+};
 
 const mapStateToProps = (state: ReduxStateType) => {
 
@@ -43,4 +94,4 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer)
