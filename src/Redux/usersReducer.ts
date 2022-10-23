@@ -3,6 +3,7 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_STATE = "SET-STATE"
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
 const CHANGE_CURRENT_PAGE = "CHANGE-CURRENT-PAGE"
+const SET_FETCHING = "FETCHING-IN-PROGRESS"
 
 
 export type UsersType = {
@@ -19,13 +20,15 @@ export type     UsersPageType = {
     totalUsersCount: number
     pagesCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 const initialState = {
     users: [],
     totalUsersCount: 0,
     pagesCount: 10,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: true
 }
 
 export const usersReducer = (state: UsersPageType = initialState, action: UsersActionsType) => {
@@ -46,12 +49,14 @@ export const usersReducer = (state: UsersPageType = initialState, action: UsersA
             return {...state, totalUsersCount: action.payload.count}
         case CHANGE_CURRENT_PAGE:
             return {...state, currentPage: action.payload.page}
+        case SET_FETCHING:
+            return {...state, isFetching: action.payload.value}
         default:
             return state
     }
 }
 
-export type UsersActionsType = FollowACType | UnfollowACType | SetUserStateType | setTotalUsersCountACType | changeCurrentPageACType
+export type UsersActionsType = FollowACType | UnfollowACType | SetUserStateType | setTotalUsersCountACType | changeCurrentPageACType | setFetchingACType
 
 type FollowACType = ReturnType<typeof followAC>
 export const followAC = (userId: number) => {
@@ -100,6 +105,17 @@ export const changeCurrentPageAC = (page: number) => {
         }
     }as const
 }
+
+type setFetchingACType = ReturnType<typeof setFetchingAC>
+export const setFetchingAC = (value: boolean) => {
+    return {
+        type: SET_FETCHING,
+        payload: {
+            value
+        }
+    } as const
+}
+
 
 
 

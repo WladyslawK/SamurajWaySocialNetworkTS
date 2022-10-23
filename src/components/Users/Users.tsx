@@ -1,6 +1,7 @@
 import React from 'react';
-import style from "./Users.module.css";
-import {UsersType} from "../../Redux/usersReducer";
+import style from './Users.module.css';
+import {UsersType} from '../../Redux/usersReducer';
+import userLogo from './../../assets/images/user.png'
 
 type UsersComponentType = {
     users: UsersType[]
@@ -81,7 +82,7 @@ export const Users: React.FC<UsersComponentType> = (props) => {
                         <div className={style.userContainer} key={user.id}>
                             <span>
                                 {user.photos.small !== null ? user.photos.small : <img
-                                    src="https://tork.news/__export/1659017759401/sites/tork/img/2022/07/28/jason-statham-1200.jpg_718194491.jpg"
+                                    src={userLogo}
                                     alt="avatar"/>}
 
                             </span>
