@@ -40,20 +40,63 @@ export class Users extends React.Component<UsersComponentType, {}> {
     render() {
 
         let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pagesCount)
-        const pagination = []
+        const pagination: Array<number> = []
 
         for (let i = 1; i <= pagesCount; i++) {
             pagination.push(i)
         }
 
+        const firstpage = <span
+            className={pagination[0] === this.props.currentPage ? `${style.selected} ${style.span}` : `${style.span}`}
+            onClick={() => {
+                this.changePage(pagination[0])
+            }}>{pagination[0]}</span>
+
+        const lastpage = <span
+            className={pagination[pagination.length - 1] === this.props.currentPage ? `${style.selected} ${style.span}` : `${style.span}`}
+            onClick={() => {
+                this.changePage(pagination[pagination.length - 1])
+            }}>{pagination[pagination.length - 1]}</span>
+
+        let pages: Array<number> = this.props.currentPage === 1 ? pagination.slice(0, 3) : pagination.slice(this.props.currentPage - 2, (this.props.currentPage - 1) + 2)
+
+
+        let pagesElements = pages.map((element, i) =>
+            <span
+                key={i}
+                className={element === this.props.currentPage ? `${style.selected} ${style.span}` : `${style.span}`}
+                onClick={() => {
+                    this.changePage(element)
+                }}>{element}</span>)
+
+        console.log(pages)
         return (
             <div>
                 <div>
+
                     {
-                        pagination.map((element, i) => <span key={i} className={element === this.props.currentPage ? `${style.selected} ${style.span}` : `${style.span}`} onClick={() => {
-                            this.changePage(element)
-                        }}>{element}</span>)
+                        this.props.currentPage <= 2 ?
+                            <>
+                                {pagesElements}
+                                <span>...</span>
+                                {lastpage}
+                            </> :
+                            this.props.currentPage >= pagination[pagination.length - 2] ?
+                                <>
+                                    {firstpage}
+                                    <span>...</span>
+                                    {pagesElements}
+                                </> :
+                                <>
+                                    {firstpage}
+                                    <span>...</span>
+                                    {pagesElements}
+                                    <span>...</span>
+                                    {lastpage}
+                                </>
                     }
+
+
                 </div>
                 {
                     this.props.users && this.props.users.map(user => {
