@@ -1,12 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {AppDispatch, ReduxStateType} from "../../Redux/redux-store";
+import {ReduxStateType} from "../../Redux/redux-store";
 import {
-    changeCurrentPageAC,
-    followAC, setFetchingAC,
-    setTotalUsersCountAC,
-    setUserStateAC,
-    unfollowAC,
+     followUser, setCurrentPage, setDataFetching, setTotalUsersCount, setUsersState, unfollowUser,
     UsersType
 } from "../../Redux/usersReducer";
 import axios from "axios";
@@ -90,7 +86,7 @@ const mapStateToProps = (state: ReduxStateType) => {
     }
 }
 
-const mapDispatchToProps = (dispatch: AppDispatch) => {
+/*const mapDispatchToProps = (dispatch: AppDispatch) => {
     return {
         followUser: (userId: number) => {
             dispatch(followAC(userId))
@@ -111,6 +107,13 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
             dispatch(setFetchingAC(value))
         }
     }
-}
+}*/
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer)
+export const UsersContainer = connect(mapStateToProps, {
+    followUser,
+    unfollowUser,
+    setUsersState,
+    setCurrentPage,
+    setTotalUsersCount,
+    setDataFetching
+})(UsersAPIContainer)

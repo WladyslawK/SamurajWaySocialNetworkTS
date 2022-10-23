@@ -58,8 +58,8 @@ export const usersReducer = (state: UsersPageType = initialState, action: UsersA
 
 export type UsersActionsType = FollowACType | UnfollowACType | SetUserStateType | setTotalUsersCountACType | changeCurrentPageACType | setFetchingACType
 
-type FollowACType = ReturnType<typeof followAC>
-export const followAC = (userId: number) => {
+type FollowACType = ReturnType<typeof followUser>
+export const followUser = (userId: number) => {
     return {
         type: FOLLOW,
         payload: {
@@ -68,8 +68,8 @@ export const followAC = (userId: number) => {
     } as const
 }
 
-type UnfollowACType = ReturnType<typeof unfollowAC>
-export const unfollowAC = (userId: number) => {
+type UnfollowACType = ReturnType<typeof unfollowUser>
+export const unfollowUser = (userId: number) => {
     return {
         type: UNFOLLOW,
         payload: {
@@ -78,8 +78,8 @@ export const unfollowAC = (userId: number) => {
     } as const
 }
 
-type SetUserStateType = ReturnType<typeof setUserStateAC>
-export const setUserStateAC = (users: UsersType[]) => {
+type SetUserStateType = ReturnType<typeof setUsersState>
+export const setUsersState = (users: UsersType[]) => {
     return {
         type: SET_STATE,
         payload: {
@@ -88,16 +88,16 @@ export const setUserStateAC = (users: UsersType[]) => {
     } as const
 }
 
-type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-export const setTotalUsersCountAC = (count: number) => {
+type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
+export const setTotalUsersCount = (count: number) => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         payload: {count}
     } as const
 }
 
-type changeCurrentPageACType = ReturnType<typeof changeCurrentPageAC>
-export const changeCurrentPageAC = (page: number) => {
+type changeCurrentPageACType = ReturnType<typeof setCurrentPage>
+export const setCurrentPage = (page: number) => {
     return {
         type: CHANGE_CURRENT_PAGE,
         payload: {
@@ -106,8 +106,8 @@ export const changeCurrentPageAC = (page: number) => {
     }as const
 }
 
-type setFetchingACType = ReturnType<typeof setFetchingAC>
-export const setFetchingAC = (value: boolean) => {
+type setFetchingACType = ReturnType<typeof setDataFetching>
+export const setDataFetching = (value: boolean) => {
     return {
         type: SET_FETCHING,
         payload: {
