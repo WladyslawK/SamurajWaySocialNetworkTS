@@ -15,7 +15,7 @@ export type UsersType = {
     followed: boolean
 }
 
-export type     UsersPageType = {
+export type UsersPageType = {
     users: UsersType[]
     totalUsersCount: number
     pagesCount: number

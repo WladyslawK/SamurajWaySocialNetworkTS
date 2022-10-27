@@ -1,4 +1,5 @@
 import {ActionsType, AppDispatch, ReduxStateType, store} from "../Redux/redux-store";
+import {UsersProfileType} from "../Redux/profilePageReducer";
 
 export type PostType = {
     id: number
@@ -21,6 +22,7 @@ export type MessageType = {
 export type ProfilePageType = {
     postsData: PostType[]
     newPostText: string
+    userProfile: null | UsersProfileType
 }
 
 export type DialogsPageType = {
@@ -41,8 +43,9 @@ export type AppType = {
 }
 
 export type ProfileType = {
-    profilePage: ProfilePageType
-    dispatch: (action: ActionsType) => void
+    /*profilePage: ProfilePageType
+    dispatch: (action: ActionsType) => void*/
+    userProfile: UsersProfileType | null
 }
 
 export type DialogsContainerType = {

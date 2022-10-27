@@ -9,12 +9,14 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
 
     const dialogElements = props.dialogsData && props.dialogsData.map(dialog =>
         <Dialog
+            key={dialog.id}
             name={dialog.name}
             id={dialog.id}
         />)
 
     const messagesElements = props.messagesData && props.messagesData.map(message =>
         <Message
+            key={message.id}
             id={message.id}
             message={message.text}
         />)

@@ -59,6 +59,6 @@ export const store = {
         /*profilePageReducer(this._state.profilePage, action)
         dialogsPageReducer(this._state.dialogsPage, action)*/
 
-        this._callSubscriber(this._state)
+        //this._callSubscriber(this._state)
     }
 }
