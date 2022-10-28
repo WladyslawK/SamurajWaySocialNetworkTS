@@ -22,12 +22,28 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({img, userProfile}) => {
                 <img src={img} alt="img"/>
             </div>
             <div className={styles.description}>
-                Ava + description
-                <br/>
-                <img style={{width: "80px", height: "80px", borderRadius: "50%"}} src={userProfile.photos.small}
+                <img style={{width: "80px", height: "80px", borderRadius: "50%"}}
+                     src={userProfile.photos.small}
                      alt="logo"/>
                 <br/>
-                {userProfile && userProfile.aboutMe}
+                {userProfile &&
+                    <div>
+                        <h2>{userProfile.fullName}</h2>
+                        <span>{userProfile.aboutMe}</span><br/>
+                        <span>Looking for a job: <span>{userProfile.lookingForAJobDescription}</span></span>
+                        <div>
+                            <h3>Contacts</h3>
+                            <p>
+                                Facebook: {userProfile.contacts.facebook ? userProfile.contacts.facebook : "no account"} <br/>
+                                Website: {userProfile.contacts.website ? userProfile.contacts.website : "do not have a website"}<br/>
+                                Instgram: {userProfile.contacts.instagram ? userProfile.contacts.instagram : "no account"}<br/>
+                                GitHub: {userProfile.contacts.github ? userProfile.contacts.github : "no account"}<br/>
+                                YouTube: {userProfile.contacts.youtube ? userProfile.contacts.youtube : "no account"}<br/>
+                            </p>
+                        </div>
+                    </div>
+
+                }
             </div>
         </div>
 

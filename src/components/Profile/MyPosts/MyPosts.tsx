@@ -19,7 +19,7 @@ export const MyPosts: React.FC<MyPostsType> = ({postsData, newPostText, addPost,
 
     return (
         <div className={s.posts}>
-            My Posts
+            <h3>My Posts</h3>
             <div>
                 <textarea onChange={updateTextHandler} ref={newPostTextReference} value={newPostText}></textarea>
                 <button onClick={addPost}>Add post</button>
