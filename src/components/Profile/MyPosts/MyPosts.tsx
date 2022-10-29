@@ -2,8 +2,9 @@ import React, {RefObject} from 'react';
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {MyPostsType} from "../../../consts vs types/types";
+import {updateNewPostText} from "../../../Redux/profilePageReducer";
 
-export const MyPosts: React.FC<MyPostsType> = ({postsData, newPostText, addPost, updateText}) => {
+export const MyPosts: React.FC<MyPostsType> = ({postsData, newPostText, addPost, updateNewPostText}) => {
 
     const postsElements = postsData && postsData.map(post =>
         <Post
@@ -15,7 +16,7 @@ export const MyPosts: React.FC<MyPostsType> = ({postsData, newPostText, addPost,
 
     let newPostTextReference: RefObject<HTMLTextAreaElement> = React.createRef()
 
-    const updateTextHandler = () => updateText(newPostTextReference.current?.value as string)
+    const updateTextHandler = () => updateNewPostText(newPostTextReference.current?.value as string)
 
     return (
         <div className={s.posts}>

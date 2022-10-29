@@ -32,8 +32,8 @@ export const dialogsPageReducer = (state: DialogsPageType = initialState, action
 
 export type DialogsPageActionsType = updateNewMessageTextACType | sendNewMessageACType
 
-type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
-export const updateNewMessageTextAC = (newText: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText} as const)
+type updateNewMessageTextACType = ReturnType<typeof updateNewMessageText>
+export const updateNewMessageText = (newText: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText} as const)
 
-type sendNewMessageACType = ReturnType<typeof sendNewMessageAC>
-export const sendNewMessageAC = () => ({type: ADD_NEW_MESSAGE} as const)
+type sendNewMessageACType = ReturnType<typeof sendNewMessage>
+export const sendNewMessage = () => ({type: ADD_NEW_MESSAGE} as const)

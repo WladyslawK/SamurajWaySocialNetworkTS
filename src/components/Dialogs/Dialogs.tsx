@@ -23,7 +23,7 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
 
     const newMessageReference: RefObject<HTMLTextAreaElement> = React.createRef()
 
-    const updateNewMessageHandler = () => props.updateNewMessText(newMessageReference.current?.value as string)
+    const updateNewMessageHandler = () => props.updateNewMessageText(newMessageReference.current?.value as string)
 
     //UI
     return (
