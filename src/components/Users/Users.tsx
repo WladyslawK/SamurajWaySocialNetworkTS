@@ -25,13 +25,13 @@ export const Users: React.FC<UsersComponentType> = (props) => {
         pagination.push(i)
     }
 
-    const firstpage = <span
+    const firstPage = <span
         className={pagination[0] === props.currentPage ? `${style.selected} ${style.span}` : `${style.span}`}
         onClick={() => {
             props.changePage(pagination[0])
         }}>{pagination[0]}</span>
 
-    const lastpage = <span
+    const lastPage = <span
         className={pagination[pagination.length - 1] === props.currentPage ? `${style.selected} ${style.span}` : `${style.span}`}
         onClick={() => {
             props.changePage(pagination[pagination.length - 1])
@@ -58,20 +58,20 @@ export const Users: React.FC<UsersComponentType> = (props) => {
                         <>
                             {pagesElements}
                             <span>...</span>
-                            {lastpage}
+                            {lastPage}
                         </> :
                         props.currentPage >= pagination[pagination.length - 2] ?
                             <>
-                                {firstpage}
+                                {firstPage}
                                 <span>...</span>
                                 {pagesElements}
                             </> :
                             <>
-                                {firstpage}
+                                {firstPage}
                                 <span>...</span>
                                 {pagesElements}
                                 <span>...</span>
-                                {lastpage}
+                                {lastPage}
                             </>
                 }
 
