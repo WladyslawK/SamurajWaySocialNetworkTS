@@ -82,9 +82,11 @@ export const Users: React.FC<UsersComponentType> = (props) => {
                     return (
                         <div className={style.userContainer} key={user.id}>
                             <NavLink to={"/profile/" + user.id}>
-                                {user.photos.small !== null ? user.photos.small : <img
-                                    src={userLogo}
-                                    alt="avatar"/>}
+                                {
+                                    user.photos.small !== null ?
+                                        <img src={user.photos.small} alt="logo"/> :
+                                        <img src={userLogo} alt="avatar"/>
+                                }
 
                             </NavLink>
                             <div>

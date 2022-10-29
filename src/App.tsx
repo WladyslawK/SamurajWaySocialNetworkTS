@@ -8,7 +8,8 @@ import {Music} from "./components/Music/Music";
 import {AppType} from "./consts vs types/types";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+
 
 
 export const App: React.FC<AppType> = ({state, dispatch}) => {
@@ -18,7 +19,7 @@ export const App: React.FC<AppType> = ({state, dispatch}) => {
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path={"/profile"}
+                    <Route path={"/profile/:userid?"}
                            render={() => <ProfileContainer/>}/>
                     <Route path={"/dialogs"} render={() =>
                         <DialogsContainer/>}/>
