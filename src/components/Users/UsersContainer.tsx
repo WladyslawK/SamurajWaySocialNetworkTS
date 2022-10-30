@@ -2,18 +2,19 @@ import React from 'react';
 import {connect} from "react-redux";
 import {ReduxStateType} from "../../Redux/redux-store";
 import {
-     followUser, setCurrentPage, setDataFetching, setTotalUsersCount, setUsersState, unfollowUser,
+    followUser, setCurrentPage, setDataFetching, setTotalUsersCount, setUsersState, unfollowUser,
     UsersType
 } from "../../Redux/usersReducer";
 import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
+import {API} from "../../api/api";
 
 
 type UsersAPIComponentType = {
     users: UsersType[]
     totalUsersCount: number
-    pagesCount: number
+    pageSize: number
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
     setUsersState: (users: UsersType[]) => void
@@ -31,22 +32,24 @@ class UsersAPIContainer extends React.Component<UsersAPIComponentType, {}> {
 
     componentDidMount() {
         this.props.setDataFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}`, {withCredentials: true})
+
+        API.getUsers(this.props.currentPage)
             .then(response => {
                 console.log("Users: ", response)
                 this.props.setDataFetching(false)
-                this.props.setUsersState(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsersState(response.items)
+                this.props.setTotalUsersCount(response.totalCount)
             })
     }
 
     changePage = (page: number) => {
         this.props.setDataFetching(true)
         this.props.setCurrentPage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}`, {withCredentials: true})
+
+        API.getUsers(page)
             .then(response => {
                 this.props.setDataFetching(false)
-                this.props.setUsersState(response.data.items)
+                this.props.setUsersState(response.items)
             })
     }
 
@@ -60,7 +63,7 @@ class UsersAPIContainer extends React.Component<UsersAPIComponentType, {}> {
                             users={this.props.users}
                             totalUsersCount={this.props.totalUsersCount}
                             setTotalUsersCount={this.props.setTotalUsersCount}
-                            pagesCount={this.props.pagesCount}
+                            pageSize={this.props.pageSize}
                             currentPage={this.props.currentPage}
                             followUser={this.props.followUser}
                             changePage={this.changePage}
@@ -80,7 +83,7 @@ const mapStateToProps = (state: ReduxStateType) => {
     return {
         users: state.usersReducer.users,
         totalUsersCount: state.usersReducer.totalUsersCount,
-        pagesCount: state.usersReducer.pagesCount,
+        pageSize: state.usersReducer.pageSize,
         currentPage: state.usersReducer.currentPage,
         isFetching: state.usersReducer.isFetching
     }

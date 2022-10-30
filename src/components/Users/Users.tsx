@@ -8,7 +8,7 @@ import axios from "axios";
 type UsersComponentType = {
     users: UsersType[]
     totalUsersCount: number
-    pagesCount: number
+    pageSize: number
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
     currentPage: number
@@ -19,7 +19,7 @@ type UsersComponentType = {
 export const Users: React.FC<UsersComponentType> = (props) => {
 
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pagesCount)
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     const pagination: Array<number> = []
 
     for (let i = 1; i <= pagesCount; i++) {
