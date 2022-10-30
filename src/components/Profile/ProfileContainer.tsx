@@ -13,6 +13,7 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type mapStateToPropsType = {
     userProfile: UsersProfileType | null
+    userId: number | null
 }
 
 type mapDispatchToPropsType = {
@@ -30,7 +31,7 @@ class ProfileContainer extends React.Component<ProfileContainerType>{
     componentDidMount() {
         let userId = this.props.match.params.userid
         if(!userId){
-            userId = "2"
+            userId = String(this.props.userId)
         }
         axios.get("https://social-network.samuraijs.com/api/1.0//profile/"+userId)
             .then(response => {
@@ -49,7 +50,8 @@ class ProfileContainer extends React.Component<ProfileContainerType>{
 };
 
 let mapStateToProps = (state: ReduxStateType) : mapStateToPropsType => ({
-    userProfile: state.profilePageReducer.userProfile
+    userProfile: state.profilePageReducer.userProfile,
+    userId: state.authReducer.userId
 })
 
 let ProfileContainerWithRouter = withRouter(ProfileContainer)

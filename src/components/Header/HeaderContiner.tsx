@@ -6,9 +6,11 @@ import {connect} from "react-redux";
 import {AuthProfileType, setUsersData} from "../../Redux/auth-reducer";
 import {profilePageReducer, setUserProfile, UsersProfileType} from "../../Redux/profilePageReducer";
 
+
 type HeaderContainerType = {
     authData: AuthProfileType
     setUsersData: (userId: number, login: string, email: string) => void
+    setUserProfile: (profile: UsersProfileType) => void
 }
 
 class HeaderContainer extends Component<HeaderContainerType> {
@@ -18,7 +20,6 @@ class HeaderContainer extends Component<HeaderContainerType> {
                 const {id, login, email} = response.data.data
                 this.props.setUsersData(id, login, email)
             })
-
     }
 
     render() {
@@ -34,4 +35,4 @@ const mapStateToProps = (state: ReduxStateType) => ({
     authData: state.authReducer,
 })
 
-export default connect(mapStateToProps, {setUsersData})(HeaderContainer);
+export default connect(mapStateToProps, {setUsersData, setUserProfile})(HeaderContainer);

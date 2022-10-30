@@ -2,6 +2,7 @@ import React from 'react';
 import style from "./Header.module.css"
 import logo from "./../../assets/images/logo.png"
 import {AuthProfileType} from "../../Redux/auth-reducer";
+import {UsersProfileType} from "../../Redux/profilePageReducer";
 
 type HeaderType = {
     authData: AuthProfileType
