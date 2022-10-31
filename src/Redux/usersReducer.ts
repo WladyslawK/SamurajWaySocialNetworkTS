@@ -4,6 +4,7 @@ const SET_STATE = "SET-STATE"
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
 const CHANGE_CURRENT_PAGE = "CHANGE-CURRENT-PAGE"
 const SET_FETCHING = "FETCHING-IN-PROGRESS"
+const FOLLOWING_IN_PROGRESS = "FOLLOWING-IN-PROGRESS"
 
 
 export type UsersType = {
@@ -21,6 +22,7 @@ export type UsersPageType = {
     pageSize: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 }
 
 const initialState = {
@@ -28,10 +30,11 @@ const initialState = {
     totalUsersCount: 0,
     pageSize: 10,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: []
 }
 
-export const usersReducer = (state: UsersPageType = initialState, action: UsersActionsType) => {
+export const usersReducer = (state: UsersPageType = initialState, action: UsersActionsType): UsersPageType => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -51,12 +54,17 @@ export const usersReducer = (state: UsersPageType = initialState, action: UsersA
             return {...state, currentPage: action.payload.page}
         case SET_FETCHING:
             return {...state, isFetching: action.payload.value}
+        case FOLLOWING_IN_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.payload.progress ? [...state.followingInProgress, action.payload.id] : state.followingInProgress.filter(id => id != action.payload.id)
+            }
         default:
             return state
     }
 }
 
-export type UsersActionsType = FollowACType | UnfollowACType | SetUserStateType | setTotalUsersCountACType | changeCurrentPageACType | setFetchingACType
+export type UsersActionsType = FollowACType | UnfollowACType | SetUserStateType | setTotalUsersCountACType | changeCurrentPageACType | setFetchingACType | setFollowingInProgressType
 
 type FollowACType = ReturnType<typeof followUser>
 export const followUser = (userId: number) => {
@@ -115,6 +123,10 @@ export const setDataFetching = (value: boolean) => {
         }
     } as const
 }
+
+type setFollowingInProgressType = ReturnType<typeof setFollowingInProgress>
+export const setFollowingInProgress = (progress: boolean, id: number) => ({type: FOLLOWING_IN_PROGRESS, payload: {progress, id}} as const)
+
 
 
 

@@ -2,7 +2,13 @@ import React from 'react';
 import {connect} from "react-redux";
 import {ReduxStateType} from "../../Redux/redux-store";
 import {
-    followUser, setCurrentPage, setDataFetching, setTotalUsersCount, setUsersState, unfollowUser,
+    followUser,
+    setCurrentPage,
+    setDataFetching,
+    setFollowingInProgress,
+    setTotalUsersCount,
+    setUsersState,
+    unfollowUser,
     UsersType
 } from "../../Redux/usersReducer";
 import axios from "axios";
@@ -23,6 +29,8 @@ type UsersAPIComponentType = {
     setTotalUsersCount: (count: number) => void
     isFetching: boolean
     setDataFetching: (value: boolean) => void
+    FollowingInProgress: number[],
+    setFollowingInProgress: (progress: boolean, id: number) => void
 }
 
 class UsersAPIContainer extends React.Component<UsersAPIComponentType, {}> {
@@ -67,7 +75,10 @@ class UsersAPIContainer extends React.Component<UsersAPIComponentType, {}> {
                             currentPage={this.props.currentPage}
                             followUser={this.props.followUser}
                             changePage={this.changePage}
-                            unfollowUser={this.props.unfollowUser}/>
+                            unfollowUser={this.props.unfollowUser}
+                            FollowingInProgress={this.props.FollowingInProgress}
+                            setFollowingInProgress={this.props.setFollowingInProgress}
+                        />
                 }
             </>
 
@@ -85,7 +96,8 @@ const mapStateToProps = (state: ReduxStateType) => {
         totalUsersCount: state.usersReducer.totalUsersCount,
         pageSize: state.usersReducer.pageSize,
         currentPage: state.usersReducer.currentPage,
-        isFetching: state.usersReducer.isFetching
+        isFetching: state.usersReducer.isFetching,
+        FollowingInProgress: state.usersReducer.followingInProgress
     }
 }
 
@@ -118,5 +130,6 @@ export const UsersContainer = connect(mapStateToProps, {
     setUsersState,
     setCurrentPage,
     setTotalUsersCount,
-    setDataFetching
+    setDataFetching,
+    setFollowingInProgress
 })(UsersAPIContainer)
