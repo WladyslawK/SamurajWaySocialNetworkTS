@@ -2,35 +2,24 @@ import React from 'react';
 import {connect} from "react-redux";
 import {ReduxStateType} from "../../Redux/redux-store";
 import {
-    followUser,
-    setCurrentPage,
-    setDataFetching,
-    setFollowingInProgress,
-    setTotalUsersCount,
-    setUsersState,
-    unfollowUser,
+    follow, getUsers, unfollow,
     UsersType
 } from "../../Redux/usersReducer";
-import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
-import {API} from "../../api/api";
+
 
 
 type UsersAPIComponentType = {
     users: UsersType[]
     totalUsersCount: number
     pageSize: number
-    followUser: (userId: number) => void
-    unfollowUser: (userId: number) => void
-    setUsersState: (users: UsersType[]) => void
-    setCurrentPage: (page: number) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
     currentPage: number
-    setTotalUsersCount: (count: number) => void
     isFetching: boolean
-    setDataFetching: (value: boolean) => void
-    FollowingInProgress: number[],
-    setFollowingInProgress: (progress: boolean, id: number) => void
+    FollowingInProgress: number[]
+    getUsers: (currentPage: number) => void
 }
 
 class UsersAPIContainer extends React.Component<UsersAPIComponentType, {}> {
@@ -39,7 +28,7 @@ class UsersAPIContainer extends React.Component<UsersAPIComponentType, {}> {
     }
 
     componentDidMount() {
-        this.props.setDataFetching(true)
+        /*this.props.setDataFetching(true)
 
         API.getUsers(this.props.currentPage)
             .then(response => {
@@ -47,18 +36,12 @@ class UsersAPIContainer extends React.Component<UsersAPIComponentType, {}> {
                 this.props.setDataFetching(false)
                 this.props.setUsersState(response.items)
                 this.props.setTotalUsersCount(response.totalCount)
-            })
+            })*/
+        this.props.getUsers(this.props.currentPage)
     }
 
     changePage = (page: number) => {
-        this.props.setDataFetching(true)
-        this.props.setCurrentPage(page)
-
-        API.getUsers(page)
-            .then(response => {
-                this.props.setDataFetching(false)
-                this.props.setUsersState(response.items)
-            })
+        this.props.getUsers(page)
     }
 
     render() {
@@ -70,14 +53,12 @@ class UsersAPIContainer extends React.Component<UsersAPIComponentType, {}> {
                         : <Users
                             users={this.props.users}
                             totalUsersCount={this.props.totalUsersCount}
-                            setTotalUsersCount={this.props.setTotalUsersCount}
                             pageSize={this.props.pageSize}
                             currentPage={this.props.currentPage}
-                            followUser={this.props.followUser}
+                            followUser={this.props.follow}
                             changePage={this.changePage}
-                            unfollowUser={this.props.unfollowUser}
+                            unfollowUser={this.props.unfollow}
                             FollowingInProgress={this.props.FollowingInProgress}
-                            setFollowingInProgress={this.props.setFollowingInProgress}
                         />
                 }
             </>
@@ -125,11 +106,7 @@ const mapStateToProps = (state: ReduxStateType) => {
 }*/
 
 export const UsersContainer = connect(mapStateToProps, {
-    followUser,
-    unfollowUser,
-    setUsersState,
-    setCurrentPage,
-    setTotalUsersCount,
-    setDataFetching,
-    setFollowingInProgress
+    getUsers,
+    unfollow,
+    follow
 })(UsersAPIContainer)
