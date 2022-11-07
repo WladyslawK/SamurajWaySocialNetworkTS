@@ -3,9 +3,10 @@ import styles from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {Dialog} from "./Dialog/Dialog";
 import {DialogsType} from "../../consts vs types/types";
+import {Redirect} from "react-router-dom";
+
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
-    console.log(props)
 
     const dialogElements = props.dialogsData && props.dialogsData.map(dialog =>
         <Dialog
@@ -24,6 +25,8 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
     const newMessageReference: RefObject<HTMLTextAreaElement> = React.createRef()
 
     const updateNewMessageHandler = () => props.updateNewMessageText(newMessageReference.current?.value as string)
+
+    if(!props.isAuth) return <Redirect to={"/login"}/>
 
     //UI
     return (

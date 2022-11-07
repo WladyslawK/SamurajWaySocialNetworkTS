@@ -60,6 +60,7 @@ export type DialogsType = {
     newMessageText: string
     updateNewMessageText: (text: string) => void
     sendNewMessage: () => void
+    isAuth: boolean
 }
 
 export type MyPostsContainerType = {

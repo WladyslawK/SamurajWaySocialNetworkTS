@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import Header from "./Header";
-import axios from "axios";
 import {ReduxStateType} from "../../Redux/redux-store";
 import {connect} from "react-redux";
-import {authLogIn, AuthProfileType, setUsersData} from "../../Redux/auth-reducer";
-import {profilePageReducer, setUserProfile, UsersProfileType} from "../../Redux/profilePageReducer";
+import {authLogIn, AuthProfileType} from "../../Redux/auth-reducer";
+import {setUserProfile, UsersProfileType} from "../../Redux/profilePageReducer";
 import {API} from "../../api/api";
 
 

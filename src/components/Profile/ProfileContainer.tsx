@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {Profile} from "./Profile";
 import {getProfile, setUserProfile, UsersProfileType} from "../../Redux/profilePageReducer";
 import {ReduxStateType} from "../../Redux/redux-store";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {API} from "../../api/api";
 /*type ProfileContainerType = {
     userProfile: UsersProfileType | null
@@ -15,6 +15,7 @@ import {API} from "../../api/api";
 type mapStateToPropsType = {
     userProfile: UsersProfileType | null
     userId: number | null
+    isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -28,22 +29,17 @@ type PathParamsType = {
 
 type ProfileContainerType = mapStateToPropsType & mapDispatchToPropsType & RouteComponentProps<PathParamsType>
 
-class ProfileContainer extends React.Component<ProfileContainerType>{
+class ProfileContainer extends React.Component<ProfileContainerType> {
 
     componentDidMount() {
-        /*let userId = this.props.match.params.userid
-        if(!userId){
-            userId = String(this.props.userId)
-        }
-        API.getProfile(Number(userId))
-            .then(response => {
-                this.props.setUserProfile(response.data)
-            })*/
-        if(this.props.userId)
-        this.props.getProfile(Number(this.props.match.params.userid), this.props.userId)
+
+        if (this.props.userId)
+            this.props.getProfile(Number(this.props.match.params.userid), this.props.userId)
     }
 
-    render(){
+    render() {
+        if (!this.props.isAuth) return <Redirect to={"/login"}/>
+
         return (
             <>
                 <Profile userProfile={this.props.userProfile}/>
@@ -53,9 +49,10 @@ class ProfileContainer extends React.Component<ProfileContainerType>{
 
 };
 
-let mapStateToProps = (state: ReduxStateType) : mapStateToPropsType => ({
+let mapStateToProps = (state: ReduxStateType): mapStateToPropsType => ({
     userProfile: state.profilePageReducer.userProfile,
-    userId: state.authReducer.userId
+    userId: state.authReducer.userId,
+    isAuth: state.authReducer.isAuth
 })
 
 let ProfileContainerWithRouter = withRouter(ProfileContainer)
