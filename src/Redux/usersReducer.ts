@@ -140,50 +140,43 @@ export const setFollowingInProgress = (progress: boolean, id: number) => ({
     payload: {progress, id}
 } as const)
 
-export const getUsers = (currentPage: number) => {
+export const getUsers = (currentPage: number) => (Dispatch: AppDispatch) => {
+    Dispatch(setDataFetching(true))
 
-    return (Dispatch: AppDispatch) => {
-        Dispatch(setDataFetching(true))
+    API.getUsers(currentPage)
+        .then(response => {
+            console.log("Users: ", response)
+            Dispatch(setCurrentPage(currentPage))
+            Dispatch(setDataFetching(false))
+            Dispatch(setUsersState(response.items))
+            Dispatch(setTotalUsersCount(response.totalCount))
+        })
 
-        API.getUsers(currentPage)
-            .then(response => {
-                console.log("Users: ", response)
-                Dispatch(setCurrentPage(currentPage))
-                Dispatch(setDataFetching(false))
-                Dispatch(setUsersState(response.items))
-                Dispatch(setTotalUsersCount(response.totalCount))
-            })
-    }
 
 }
 
-export const unfollow = (userId: number) => {
-
-    return (Dispatch: AppDispatch) => {
-        Dispatch(setFollowingInProgress(true, userId))
-        API.unfollow(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    Dispatch(unfollowSuccess(userId))
-                    Dispatch(setFollowingInProgress(false, userId))
-                }
-            })
-    }
+export const unfollow = (userId: number) => (Dispatch: AppDispatch) => {
+    Dispatch(setFollowingInProgress(true, userId))
+    API.unfollow(userId)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                Dispatch(unfollowSuccess(userId))
+                Dispatch(setFollowingInProgress(false, userId))
+            }
+        })
 }
 
-export const follow = (userId: number) => {
+export const follow = (userId: number) => (Dispatch: AppDispatch) => {
+    Dispatch(setFollowingInProgress(true, userId))
+    API.follow(userId)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                Dispatch(followSuccess(userId))
+                Dispatch(setFollowingInProgress(false, userId))
+            }
+        })
 
-    return (Dispatch: AppDispatch) => {
-        Dispatch(setFollowingInProgress(true, userId))
-        API.follow(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    Dispatch(followSuccess(userId))
-                    Dispatch(setFollowingInProgress(false, userId))
-                }
-            })
 
-    }
 }
 
 

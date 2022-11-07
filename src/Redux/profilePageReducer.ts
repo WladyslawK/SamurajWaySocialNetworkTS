@@ -1,6 +1,7 @@
 import {ProfilePageType} from "../consts vs types/types";
 import {ADD_POST, SET_USER_PROFILE, UPDATE_NEW_POST_TEXT} from "../consts vs types/constants";
-import {ActionsType} from "./redux-store";
+import {ActionsType, AppDispatch} from "./redux-store";
+import {API} from "../api/api";
 
 type ContactsType = {
     facebook: string
@@ -66,3 +67,17 @@ export const updateNewPostText = (newText: string) => ({type: UPDATE_NEW_POST_TE
 
 type setUserProfileType = ReturnType<typeof setUserProfile>
 export const setUserProfile = (profile: UsersProfileType) => ({type: SET_USER_PROFILE, payload: {profile}} as const)
+
+
+export const getProfile = (id: number, adminId: number) => {
+    return (Dispatch: AppDispatch) => {
+        let userId = id
+        if(!userId){
+            userId = adminId
+        }
+        API.getProfile(userId)
+            .then(response => {
+                Dispatch(setUserProfile(response.data))
+            })
+    }
+}

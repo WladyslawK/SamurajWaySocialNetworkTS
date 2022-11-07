@@ -1,3 +1,6 @@
+import {AppDispatch} from "./redux-store";
+import {API} from "../api/api";
+
 const SET_USER_DATA = "SET-USER-DATA"
 
 export type AuthProfileType = {
@@ -36,4 +39,14 @@ export const setUsersData = (userId: number, login: string, email: string ) => {
             email
         }
     } as const
+}
+
+export const authLogIn = () => {
+    return (Dispatch: AppDispatch) => {
+        API.authMe()
+            .then(response => {
+                const {id, login, email} = response.data.data
+                Dispatch(setUsersData(id, login, email))
+            })
+    }
 }
