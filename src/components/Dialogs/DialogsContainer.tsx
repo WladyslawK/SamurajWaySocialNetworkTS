@@ -3,8 +3,8 @@ import {sendNewMessage, updateNewMessageText} from "../../Redux/dialogsPageReduc
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {ReduxStateType} from "../../Redux/redux-store";
-import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type MapDispatchToPropsType = {
     updateNewMessageText: (newText: string) => void
@@ -22,4 +22,6 @@ const mapStateToProps = (state: ReduxStateType) => ({
     isAuth: state.authReducer.isAuth
 })
 
-export const DialogsContainer = connect(mapStateToProps, {updateNewMessageText, sendNewMessage})(AuthRedirectProfileComponent)
+export const DialogsContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, {updateNewMessageText, sendNewMessage}),
+    withAuthRedirect)(Dialogs)

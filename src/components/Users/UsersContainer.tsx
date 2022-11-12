@@ -7,7 +7,8 @@ import {
 } from "../../Redux/usersReducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
-
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 type UsersAPIComponentType = {
@@ -28,15 +29,6 @@ class UsersAPIContainer extends React.Component<UsersAPIComponentType, {}> {
     }
 
     componentDidMount() {
-        /*this.props.setDataFetching(true)
-
-        API.getUsers(this.props.currentPage)
-            .then(response => {
-                console.log("Users: ", response)
-                this.props.setDataFetching(false)
-                this.props.setUsersState(response.items)
-                this.props.setTotalUsersCount(response.totalCount)
-            })*/
         this.props.getUsers(this.props.currentPage)
     }
 
@@ -62,10 +54,7 @@ class UsersAPIContainer extends React.Component<UsersAPIComponentType, {}> {
                         />
                 }
             </>
-
-
-        )
-            ;
+        );
     }
 
 };
@@ -82,31 +71,17 @@ const mapStateToProps = (state: ReduxStateType) => {
     }
 }
 
-/*const mapDispatchToProps = (dispatch: AppDispatch) => {
-    return {
-        followUser: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unfollowUser: (userId: number) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsersState: (users: UsersType []) => {
-            dispatch(setUserStateAC(users))
-        },
-        setCurrentPage: (page: number) => {
-            dispatch(changeCurrentPageAC(page))
-        },
-        setTotalUsersCount: (count: number) => {
-            dispatch(setTotalUsersCountAC(count))
-        },
-        setDataFetching: (value: boolean) => {
-            dispatch(setFetchingAC(value))
-        }
-    }
-}*/
-
-export const UsersContainer = connect(mapStateToProps, {
+/*export const UsersContainer = connect(mapStateToProps, {
     getUsers,
     unfollow,
     follow
-})(UsersAPIContainer)
+})(UsersAPIContainer)*/
+
+export const UsersContainer = compose<React.ComponentType>(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        getUsers,
+        unfollow,
+        follow
+    })
+)(UsersAPIContainer)
