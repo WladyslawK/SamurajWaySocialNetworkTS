@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from "./ProfileInfo.module.css"
-import {UsersProfileType} from "../../../../Redux/profilePageReducer";
-import {Preloader} from "../../../common/preloader/Preloader";
+import {UsersProfileType} from "../../../Redux/profilePageReducer";
+import {Preloader} from "../../common/preloader/Preloader";
+import {ProfileStatus} from "../ProfileStatus/ProfileStatus";
 
 type ProfileInfoType = {
     img: string
@@ -18,14 +19,18 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({img, userProfile}) => {
 
     return (
         <div className={styles.content}>
-            <div>
+            {/*<div>
                 <img src={img} alt="img"/>
-            </div>
+            </div>*/}
+
             <div className={styles.description}>
                 <img style={{width: "80px", height: "80px", borderRadius: "50%"}}
                      src={userProfile.photos.small}
                      alt="logo"/>
                 <br/>
+                <div>
+                    <ProfileStatus status={"Hello My Friends"}/>
+                </div>
                 {userProfile &&
                     <div>
                         <h2>{userProfile.fullName}</h2>
