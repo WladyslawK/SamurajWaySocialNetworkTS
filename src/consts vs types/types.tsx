@@ -49,18 +49,12 @@ export type ProfileType = {
     userProfile: UsersProfileType | null
 }
 
-export type DialogsContainerType = {
-    state: DialogsPageType
-    dispatch: (action: ActionsType) => void
-}
-
 export type DialogsType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
     newMessageText: string
     updateNewMessageText: (text: string) => void
     sendNewMessage: () => void
-    isAuth: boolean
 }
 
 export type MyPostsContainerType = {

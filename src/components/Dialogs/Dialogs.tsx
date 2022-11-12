@@ -26,8 +26,6 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
 
     const updateNewMessageHandler = () => props.updateNewMessageText(newMessageReference.current?.value as string)
 
-    if(!props.isAuth) return <Redirect to={"/login"}/>
-
     //UI
     return (
         <>
