@@ -48,7 +48,6 @@ export const authLogIn = () => {
     return (Dispatch: AppDispatch) => {
         usersAPI.authMe()
             .then(response => {
-                debugger
                 if(response.data.messages[0]==="You are not authorized"){
                     Dispatch(setUsersData(null, null, null,false))
                 }else{
