@@ -1,7 +1,7 @@
 import {ProfilePageType} from "../consts vs types/types";
-import {ADD_POST, SET_USER_PROFILE, UPDATE_NEW_POST_TEXT} from "../consts vs types/constants";
-import {ActionsType, AppDispatch} from "./redux-store";
-import {API} from "../api/api";
+import {ADD_POST, SET_USER_PROFILE, SET_USER_STATUS, UPDATE_NEW_POST_TEXT} from "../consts vs types/constants";
+import {AppDispatch} from "./redux-store";
+import {profileAPI, usersAPI} from "../api/usersAPI";
 
 type ContactsType = {
     facebook: string
@@ -25,8 +25,8 @@ export type UsersProfileType = {
     fullName: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
-    photos: PhotosType
-    contacts: ContactsType
+    photos: PhotosType | null
+    contacts: ContactsType | null
 }
 
 
@@ -36,7 +36,8 @@ let initialState = {
         {id: 2, text: "How are you?", likesCount: 11},
     ],
     newPostText: "IT",
-    userProfile: null
+    userProfile: null,
+    status: null
 }
 
 export const profilePageReducer = (state: ProfilePageType = initialState, action: ProfilePageActionsType): ProfilePageType => {
@@ -45,17 +46,30 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
         case UPDATE_NEW_POST_TEXT:
             return {...state, newPostText: action.payload.newText}
         case ADD_POST:
-            return {...state, postsData: [{id: 6, text: state.newPostText, likesCount: 0}, ...state.postsData], newPostText: ""}
+            return {
+                ...state,
+                postsData: [{id: 6, text: state.newPostText, likesCount: 0}, ...state.postsData],
+                newPostText: ""
+            }
         case SET_USER_PROFILE:
             return {
-                ...state, userProfile: action.payload.profile
+                ...state, userProfile: {...action.payload.profile}
+            }
+        case SET_USER_STATUS:
+            return {
+                ...state,
+                status: action.payload.status
             }
         default:
             return state
     }
 }
 
-export type ProfilePageActionsType = addPostActionCreatorType | updateNewPostTextActionCreator | setUserProfileType
+export type ProfilePageActionsType =
+    addPostActionCreatorType
+    | updateNewPostTextActionCreator
+    | setUserProfileType
+    | ReturnType<typeof setUserStatus>
 
 type addPostActionCreatorType = ReturnType<typeof addPost>
 
@@ -68,16 +82,28 @@ export const updateNewPostText = (newText: string) => ({type: UPDATE_NEW_POST_TE
 type setUserProfileType = ReturnType<typeof setUserProfile>
 export const setUserProfile = (profile: UsersProfileType) => ({type: SET_USER_PROFILE, payload: {profile}} as const)
 
+export const setUserStatus = (status: string) => ({type: SET_USER_STATUS, payload: {status}} as const)
 
-export const getProfile = (id: number, adminId: number) => {
-    return (Dispatch: AppDispatch) => {
-        let userId = id
-        if(!userId){
-            userId = adminId
+
+export const getProfile = (userId: number) => (Dispatch: AppDispatch) => {
+    usersAPI.getProfile(userId)
+        .then(response => {
+            Dispatch(setUserProfile(response.data))
+        })
+}
+
+
+export const getStatus = (userId: number) => (dispatch: AppDispatch) => {
+    profileAPI.getStatus(userId).then(res => {
+        console.log("Status: ", res)
+        dispatch(setUserStatus(res.data))
+    })
+}
+
+export const updateStatus = (status: string) => (dispatch: AppDispatch) => {
+    profileAPI.setStatus(status).then(res => {
+        if(res.data.resultCode === 0){
+            dispatch(setUserStatus(status))
         }
-        API.getProfile(userId)
-            .then(response => {
-                Dispatch(setUserProfile(response.data))
-            })
-    }
+    })
 }

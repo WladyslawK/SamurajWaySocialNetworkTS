@@ -8,16 +8,19 @@ const instance = axios.create({
     }
 })
 
-export const API = {
+export const usersAPI = {
     getUsers(page: number, count = 10){
         return instance.get(`users?page=${page}&count=${count}`, {withCredentials: true}).then(response => response.data)
     },
     authMe(){
-        return instance.get("auth/me", ({withCredentials: true}))
+        console.log("Obsolete method. Please use authAPI object")
+        return authAPI.authMe()
     },
     getProfile(userId: number){
-        return instance.get("/profile/" +userId)
+        console.log("Obsolete method. Please use profileAPI object")
+        return profileAPI.getProfile(userId)
     },
+
     follow(userId: number){
         return instance.post("follow/"+userId, {},{withCredentials: true, headers: {"API-KEY": "ad9132f6-46f4-4f27-ad35-67db1aaf2e70"}})
     },
@@ -25,5 +28,25 @@ export const API = {
         return instance.delete("follow/"+userId,{withCredentials: true, headers: {"API-KEY": "ad9132f6-46f4-4f27-ad35-67db1aaf2e70"}})
     }
 
+}
+
+export const authAPI ={
+    authMe(){
+        return instance.get("auth/me", ({withCredentials: true}))
+    },
+}
+
+export const profileAPI = {
+    // get Profile Status
+    getStatus(userId: number){
+        return instance.get(`profile/status/${userId}`)
+    },
+//setProfile Status
+    setStatus(status: string){
+        return instance.put(`/profile/status`, {status})
+    },
+    getProfile(userId: number){
+        return instance.get("/profile/" +userId)
+    },
 }
 

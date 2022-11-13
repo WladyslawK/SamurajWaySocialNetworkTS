@@ -1,5 +1,5 @@
 import {AppDispatch} from "./redux-store";
-import {API} from "../api/api";
+import {usersAPI} from "../api/usersAPI";
 
 const SET_USER_DATA = "SET-USER-DATA"
 
@@ -46,7 +46,7 @@ export const setUsersData = (userId: number | null, login: string | null, email:
 
 export const authLogIn = () => {
     return (Dispatch: AppDispatch) => {
-        API.authMe()
+        usersAPI.authMe()
             .then(response => {
                 debugger
                 if(response.data.messages[0]==="You are not authorized"){

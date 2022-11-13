@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {ChangeEvent, RefObject} from 'react';
 
 type ProfileStatusType = {
-    status: string
+    status: string | null
+    updateStatus: (status: string) => void
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusType>{
 
     state = {
         editMode: false,
+        statusText: this.props.status ? this.props.status : ""
 
     }
     activateEditMode = () => {
@@ -21,20 +23,34 @@ export class ProfileStatus extends React.Component<ProfileStatusType>{
             ...this.state,
             editMode: false
         })
+        this.props.updateStatus(this.state.statusText)
     }
 
 
 
     render(){
+
+        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+            this.setState({
+                ...this.state,
+                statusText: e.currentTarget.value
+            })
+        }
+
+
         return (
             <div>
                 {
                     this.state.editMode ?
                         <div>
-                            <input onBlur={this.deactivateEditMode.bind(this)} autoFocus={true} type="text" value={this.props.status}/>
+                            <input
+                                onChange={onChangeHandler}
+                                   onBlur={this.deactivateEditMode.bind(this)}
+                                   autoFocus={true} type="text"
+                                   value={this.state.statusText}/>
                         </div> :
                         <div>
-                            <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                            <span onDoubleClick={this.activateEditMode}>status: {this.props.status}</span>
                         </div>
                 }
             </div>

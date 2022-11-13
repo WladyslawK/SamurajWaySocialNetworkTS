@@ -4,7 +4,7 @@ import {ReduxStateType} from "../../Redux/redux-store";
 import {connect} from "react-redux";
 import {authLogIn, AuthProfileType} from "../../Redux/auth-reducer";
 import {setUserProfile, UsersProfileType} from "../../Redux/profilePageReducer";
-import {API} from "../../api/api";
+import {usersAPI} from "../../api/usersAPI";
 
 
 type HeaderContainerType = {

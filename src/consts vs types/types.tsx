@@ -23,7 +23,8 @@ export type MessageType = {
 export type ProfilePageType = {
     postsData: PostType[]
     newPostText: string
-    userProfile: null | UsersProfileType
+    userProfile: UsersProfileType | null
+    status: string | null
 }
 
 export type DialogsPageType = {
@@ -46,7 +47,9 @@ export type AppType = {
 export type ProfileType = {
     /*profilePage: ProfilePageType
     dispatch: (action: ActionsType) => void*/
+    status: string | null
     userProfile: UsersProfileType | null
+    updateStatus: (status: string) => void
 }
 
 export type DialogsType = {

@@ -19,7 +19,6 @@ const mapStateToProps = (state: ReduxStateType) => ({
     dialogsData: state.dialogsPageReducer.dialogsData,
     messagesData: state.dialogsPageReducer.messagesData,
     newMessageText: state.dialogsPageReducer.newMessageText,
-    isAuth: state.authReducer.isAuth
 })
 
 export const DialogsContainer = compose<React.ComponentType>(

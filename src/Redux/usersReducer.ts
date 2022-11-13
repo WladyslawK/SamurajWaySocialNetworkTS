@@ -1,4 +1,4 @@
-import {API} from "../api/api";
+import {usersAPI} from "../api/usersAPI";
 import {AppDispatch} from "./redux-store";
 
 const FOLLOW = "FOLLOW"
@@ -143,7 +143,7 @@ export const setFollowingInProgress = (progress: boolean, id: number) => ({
 export const getUsers = (currentPage: number) => (Dispatch: AppDispatch) => {
     Dispatch(setDataFetching(true))
 
-    API.getUsers(currentPage)
+    usersAPI.getUsers(currentPage)
         .then(response => {
             console.log("Users: ", response)
             Dispatch(setCurrentPage(currentPage))
@@ -157,7 +157,7 @@ export const getUsers = (currentPage: number) => (Dispatch: AppDispatch) => {
 
 export const unfollow = (userId: number) => (Dispatch: AppDispatch) => {
     Dispatch(setFollowingInProgress(true, userId))
-    API.unfollow(userId)
+    usersAPI.unfollow(userId)
         .then(response => {
             if (response.data.resultCode === 0) {
                 Dispatch(unfollowSuccess(userId))
@@ -168,7 +168,7 @@ export const unfollow = (userId: number) => (Dispatch: AppDispatch) => {
 
 export const follow = (userId: number) => (Dispatch: AppDispatch) => {
     Dispatch(setFollowingInProgress(true, userId))
-    API.follow(userId)
+    usersAPI.follow(userId)
         .then(response => {
             if (response.data.resultCode === 0) {
                 Dispatch(followSuccess(userId))
