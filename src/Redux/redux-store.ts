@@ -4,7 +4,7 @@ import { ProfilePageActionsType, profilePageReducer} from "./profilePageReducer"
 import {UsersActionsType, usersReducer} from "./usersReducer";
 import {authReducer} from "./auth-reducer";
 import thunkMiddleWare from "redux-thunk"
-import thunk from "redux-thunk";
+import {reducer as FormReducer} from "redux-form"
 
 export type ActionsType = ProfilePageActionsType | DialogsPageActionsType | UsersActionsType
 
@@ -18,7 +18,8 @@ let reducers = combineReducers({
     dialogsPageReducer,
     profilePageReducer,
     usersReducer,
-    authReducer
+    authReducer,
+    form: FormReducer
 })
 
 
