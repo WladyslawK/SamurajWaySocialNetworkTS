@@ -1,0 +1,12 @@
+:focus {
+    outline: none;
+    background-color: gainsboro;
+}
+.formControl.error input,
+.formControl.error textarea {
+    border: red 2px solid;
+}
+
+.formControl.error span {
+    color: red;
+}
