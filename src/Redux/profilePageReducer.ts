@@ -1,5 +1,5 @@
 import {ProfilePageType} from "../consts vs types/types";
-import {ADD_POST, SET_USER_PROFILE, SET_USER_STATUS, UPDATE_NEW_POST_TEXT} from "../consts vs types/constants";
+import {ADD_POST, SET_USER_PROFILE, SET_USER_STATUS} from "../consts vs types/constants";
 import {AppDispatch} from "./redux-store";
 import {profileAPI, usersAPI} from "../api/usersAPI";
 
@@ -35,7 +35,6 @@ let initialState = {
         {id: 1, text: "Hi", likesCount: 12},
         {id: 2, text: "How are you?", likesCount: 11},
     ],
-    newPostText: "IT",
     userProfile: null,
     status: null
 }
@@ -43,13 +42,10 @@ let initialState = {
 export const profilePageReducer = (state: ProfilePageType = initialState, action: ProfilePageActionsType): ProfilePageType => {
 
     switch (action.type) {
-        case UPDATE_NEW_POST_TEXT:
-            return {...state, newPostText: action.payload.newText}
         case ADD_POST:
             return {
                 ...state,
-                postsData: [{id: 6, text: state.newPostText, likesCount: 0}, ...state.postsData],
-                newPostText: ""
+                postsData: [{id: 6, text: action.postText, likesCount: 0}, ...state.postsData],
             }
         case SET_USER_PROFILE:
             return {
@@ -67,17 +63,14 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
 
 export type ProfilePageActionsType =
     addPostActionCreatorType
-    | updateNewPostTextActionCreator
     | setUserProfileType
     | ReturnType<typeof setUserStatus>
 
 type addPostActionCreatorType = ReturnType<typeof addPost>
 
-type updateNewPostTextActionCreator = ReturnType<typeof updateNewPostText>
-
-export const addPost = () => ({type: ADD_POST} as const)
-
-export const updateNewPostText = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, payload: {newText}} as const)
+export const addPost = (postText: string) => {
+    return {type: ADD_POST, postText}as const
+}
 
 type setUserProfileType = ReturnType<typeof setUserProfile>
 export const setUserProfile = (profile: UsersProfileType) => ({type: SET_USER_PROFILE, payload: {profile}} as const)

@@ -1,10 +1,10 @@
-import React, {RefObject} from 'react';
+import React from 'react';
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {MyPostsType} from "../../../consts vs types/types";
-import {updateNewPostText} from "../../../Redux/profilePageReducer";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
-export const MyPosts: React.FC<MyPostsType> = ({postsData, newPostText, addPost, updateNewPostText}) => {
+export const MyPosts: React.FC<MyPostsType> = ({postsData, addPost}) => {
 
     const postsElements = postsData && postsData.map(post =>
         <Post
@@ -14,20 +14,35 @@ export const MyPosts: React.FC<MyPostsType> = ({postsData, newPostText, addPost,
             likesCount={post.likesCount}
         />)
 
-    let newPostTextReference: RefObject<HTMLTextAreaElement> = React.createRef()
-
-    const updateTextHandler = () => updateNewPostText(newPostTextReference.current?.value as string)
+    const addNewPost = (data: AddNewPostType) => {
+        addPost(data.newPostText)
+    }
 
     return (
         <div className={s.posts}>
             <h3>My Posts</h3>
-            <div>
-                <textarea onChange={updateTextHandler} ref={newPostTextReference} value={newPostText}></textarea>
-                <button onClick={addPost}>Add post</button>
-            </div>
+            <AddNewReduxPost onSubmit={addNewPost}/>
             <div>
                 {postsElements}
             </div>
         </div>
-    );
-};
+    )
+}
+
+
+type AddNewPostType = {
+    newPostText: string
+}
+const AddNewPost: React.FC<InjectedFormProps<AddNewPostType>> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field name="newPostText" placeholder={"Enter your post text"} component={"textarea"}/>
+            </div>
+            <div>
+                <button>Add post</button>
+            </div>
+        </form>)
+}
+
+const AddNewReduxPost = reduxForm<AddNewPostType>({form: "AddPost"})(AddNewPost)

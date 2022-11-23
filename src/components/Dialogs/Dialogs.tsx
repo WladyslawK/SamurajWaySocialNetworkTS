@@ -1,9 +1,10 @@
-import React, {RefObject} from "react";
+import React from "react";
 import styles from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
-import {Dialog} from "./Dialog/Dialog";
+import {Dialog} from "./dialog/Dialog";
 import {DialogsType} from "../../consts vs types/types";
-import {Redirect} from "react-router-dom";
+import {AddMessageFormType, AddMessageReduxForm} from "./addNewMessage/AddNewMessage";
+
 
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
@@ -22,9 +23,7 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
             message={message.text}
         />)
 
-    const newMessageReference: RefObject<HTMLTextAreaElement> = React.createRef()
-
-    const updateNewMessageHandler = () => props.updateNewMessageText(newMessageReference.current?.value as string)
+    const SubmitMessage = (data: AddMessageFormType) => {props.sendNewMessage(data.newMessage)}
 
     //UI
     return (
@@ -38,12 +37,13 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
                 </div>
             </div>
             <div className={styles.newMessageContainer}>
-                <textarea
+                <AddMessageReduxForm onSubmit={SubmitMessage}/>
+                {/*<textarea
                     value={props.newMessageText}
                     onChange={updateNewMessageHandler}
                     ref={newMessageReference}>
                 </textarea>
-                <button onClick={props.sendNewMessage}>Send</button>
+                <button onClick={props.sendNewMessage}>Send</button>*/}
             </div>
         </>
 

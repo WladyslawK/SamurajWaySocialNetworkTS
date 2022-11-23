@@ -1,5 +1,5 @@
 import {StateType} from "../consts vs types/types";
-import {ADD_NEW_MESSAGE, ADD_POST, UPDATE_NEW_MESSAGE_TEXT, UPDATE_NEW_POST_TEXT} from "../consts vs types/constants";
+import {ADD_NEW_MESSAGE, ADD_POST, UPDATE_NEW_MESSAGE_TEXT} from "../consts vs types/constants";
 import {profilePageReducer} from "./profilePageReducer";
 import {dialogsPageReducer} from "./dialogsPageReducer";
 import {debuglog} from "util";

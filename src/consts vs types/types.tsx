@@ -1,6 +1,5 @@
 import {ActionsType, AppDispatch, ReduxStateType, store} from "../Redux/redux-store";
-import {updateNewPostText, UsersProfileType} from "../Redux/profilePageReducer";
-import {sendNewMessage, updateNewMessageText} from "../Redux/dialogsPageReducer";
+import {UsersProfileType} from "../Redux/profilePageReducer";
 
 export type PostType = {
     id: number
@@ -22,7 +21,6 @@ export type MessageType = {
 
 export type ProfilePageType = {
     postsData: PostType[]
-    newPostText: string
     userProfile: UsersProfileType | null
     status: string | null
 }
@@ -30,7 +28,6 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogsData: DialogType[]
     messagesData:  MessageType[]
-    newMessageText: string
 }
 
 export type StateType = {
@@ -57,7 +54,7 @@ export type DialogsType = {
     messagesData: MessageType[]
     newMessageText: string
     updateNewMessageText: (text: string) => void
-    sendNewMessage: () => void
+    sendNewMessage: (message: string) => void
 }
 
 export type MyPostsContainerType = {
@@ -68,9 +65,7 @@ export type MyPostsContainerType = {
 
 export type MyPostsType = {
     postsData: PostType[]
-    newPostText: string
-    addPost: () => void
-    updateNewPostText: (text: string) => void
+    addPost: (newPost: string) => void
 }
 
 // export type ActionType = {

@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
-import {News} from "./components/News/News";
-import {Music} from "./components/Music/Music";
+import {News} from "./components/news/News";
+import {Music} from "./components/music/Music";
 import {AppType} from "./consts vs types/types";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
