@@ -1,5 +1,5 @@
-import {AppDispatch} from "./redux-store";
-import {usersAPI} from "../api/usersAPI";
+import {AppDispatch, ThunkAppDispatch} from "./redux-store";
+import {authAPI, usersAPI} from "../api/usersAPI";
 
 const SET_USER_DATA = "SET-USER-DATA"
 
@@ -17,7 +17,7 @@ const initialState = {
     isAuth: false
 }
 
-export const authReducer = (state: AuthProfileType = initialState, action: authActionsType): AuthProfileType => {
+export const authReducer = (state: AuthProfileType = initialState, action: AuthActionsType): AuthProfileType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -29,7 +29,7 @@ export const authReducer = (state: AuthProfileType = initialState, action: authA
     }
 }
 
-export type authActionsType = setUsersDataAC
+export type AuthActionsType = setUsersDataAC
 
 type setUsersDataAC = ReturnType<typeof setUsersData>
 export const setUsersData = (userId: number | null, login: string | null, email: string | null, isAuth: boolean) => {
@@ -44,17 +44,37 @@ export const setUsersData = (userId: number | null, login: string | null, email:
     } as const
 }
 
-export const authLogIn = () => {
-    return (Dispatch: AppDispatch) => {
+export const getAuthUserData = () => {
+    return (dispatch: AppDispatch) => {
         usersAPI.authMe()
             .then(response => {
-                if(response.data.messages[0]==="You are not authorized"){
-                    Dispatch(setUsersData(null, null, null,false))
+                if(response.data.messages[0] === "You are not authorized"){
+                    dispatch(setUsersData(null, null, null,false))
                 }else{
                     const {id, login, email} = response.data.data
-                    Dispatch(setUsersData(id, login, email, true))
+                    dispatch(setUsersData(id, login, email, true))
                 }
 
             })
     }
+}
+
+export const login = (email: string, password: string, rememberMe: boolean) => {
+    return (dispatch: ThunkAppDispatch) => {
+        authAPI.login(email, password, rememberMe)
+            .then(res => {
+                if(res.data.resultCode === 0){
+                    dispatch(getAuthUserData())
+                }
+            })
+    }
+}
+
+export const logout = () => (dispatch: ThunkAppDispatch) => {
+    authAPI.logout()
+        .then(res => {
+            if(res.data.resultCode === 0){
+                dispatch(setUsersData(null, null, null,false))
+            }
+        })
 }

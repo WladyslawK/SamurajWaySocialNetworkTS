@@ -2,10 +2,11 @@ import React from 'react';
 import style from "./Header.module.css"
 import logo from "./../../assets/images/logo.png"
 import {AuthProfileType} from "../../Redux/auth-reducer";
-import {UsersProfileType} from "../../Redux/profilePageReducer";
+import {NavLink} from "react-router-dom";
 
 type HeaderType = {
     authData: AuthProfileType
+    logout: () => void
 }
 
 const Header: React.FC<HeaderType> = (props) => {
@@ -17,7 +18,12 @@ const Header: React.FC<HeaderType> = (props) => {
                     src={logo}
                     alt="logo"/>
                 <div className={style.loginContainer}>
-                    {login ? login : "not Logged in"}
+                    {login ?
+                        <>
+                            <span>{login}</span>
+                            <button onClick={props.logout} >Logout</button>
+                        </> :
+                        <NavLink to={"/login"}>Login</NavLink>}
                 </div>
             </header>
         </>

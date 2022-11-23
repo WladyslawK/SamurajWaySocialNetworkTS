@@ -1,14 +1,18 @@
-import {applyMiddleware, combineReducers, createStore, Store} from "redux";
+import {AnyAction, applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {dialogsPageReducer, DialogsPageActionsType} from "./dialogsPageReducer";
 import { ProfilePageActionsType, profilePageReducer} from "./profilePageReducer";
 import {UsersActionsType, usersReducer} from "./usersReducer";
-import {authReducer} from "./auth-reducer";
-import thunkMiddleWare from "redux-thunk"
+import {AuthActionsType, authReducer} from "./auth-reducer";
+import thunkMiddleWare, {ThunkDispatch} from "redux-thunk"
 import {reducer as FormReducer} from "redux-form"
 
-export type ActionsType = ProfilePageActionsType | DialogsPageActionsType | UsersActionsType
+export type ActionsType = ProfilePageActionsType | DialogsPageActionsType | UsersActionsType | AuthActionsType
 
 export type AppDispatch = typeof store.dispatch
+
+export type ThunkAppDispatch = ThunkDispatch<AppDispatch, any, AnyAction>
+
+
 
 export type StoreType = Store<ReduxStateType, ActionsType>
 
