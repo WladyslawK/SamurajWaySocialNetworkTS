@@ -1,5 +1,6 @@
 import {AppDispatch, ThunkAppDispatch} from "./redux-store";
 import {authAPI, usersAPI} from "../api/usersAPI";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = "SET-USER-DATA"
 
@@ -60,11 +61,15 @@ export const getAuthUserData = () => {
 }
 
 export const login = (email: string, password: string, rememberMe: boolean) => {
+
     return (dispatch: ThunkAppDispatch) => {
         authAPI.login(email, password, rememberMe)
             .then(res => {
                 if(res.data.resultCode === 0){
                     dispatch(getAuthUserData())
+                }else{
+                    let message = res.data.messages.length > 0 ? res.data.messages[0] : "Some error"
+                    dispatch(stopSubmit("login", {_error: message}))
                 }
             })
     }
