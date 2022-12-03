@@ -37,7 +37,9 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
 
         let userId: number = Number(this.props.match.params.userid)
         if (!userId) {
+
             userId = this.props.profileId ? this.props.profileId : -1
+
         }
 
         this.props.getProfile(userId)
@@ -71,4 +73,5 @@ export default compose<React.ComponentType>(
         updateStatus
     }),
     withRouter,
-    withAuthRedirect)(ProfileContainer)
+    //withAuthRedirect
+)(ProfileContainer)

@@ -78,7 +78,7 @@ const mapStateToProps = (state: ReduxStateType) => {
 })(UsersAPIContainer)*/
 
 export const UsersContainer = compose<React.ComponentType>(
-    withAuthRedirect,
+    //withAuthRedirect,
     connect(mapStateToProps, {
         getUsers,
         unfollow,

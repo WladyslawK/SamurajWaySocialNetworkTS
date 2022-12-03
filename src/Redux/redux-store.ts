@@ -5,6 +5,7 @@ import {UsersActionsType, usersReducer} from "./usersReducer";
 import {AuthActionsType, authReducer} from "./auth-reducer";
 import thunkMiddleWare, {ThunkDispatch} from "redux-thunk"
 import {reducer as FormReducer} from "redux-form"
+import {appReducer} from "./appReducer";
 
 export type ActionsType = ProfilePageActionsType | DialogsPageActionsType | UsersActionsType | AuthActionsType
 
@@ -23,7 +24,8 @@ let reducers = combineReducers({
     profilePageReducer,
     usersReducer,
     authReducer,
-    form: FormReducer
+    form: FormReducer,
+    app: appReducer
 })
 
 

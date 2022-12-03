@@ -4,7 +4,6 @@ import {ReduxStateType} from "../../Redux/redux-store";
 import {connect} from "react-redux";
 import {getAuthUserData, AuthProfileType, logout} from "../../Redux/auth-reducer";
 import {setUserProfile, UsersProfileType} from "../../Redux/profilePageReducer";
-import {usersAPI} from "../../api/usersAPI";
 
 
 type HeaderContainerType = {
@@ -16,7 +15,7 @@ type HeaderContainerType = {
 
 class HeaderContainer extends Component<HeaderContainerType> {
     componentDidMount() {
-        this.props.authLogIn()
+        //this.props.authLogIn()
         /*API.authMe()
             .then(response => {
                 const {id, login, email} = response.data.data
