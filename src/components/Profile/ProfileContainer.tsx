@@ -39,6 +39,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
         if (!userId) {
 
             userId = this.props.profileId ? this.props.profileId : -1
+            if(userId === -1) this.props.history.push("/login")
 
         }
 
